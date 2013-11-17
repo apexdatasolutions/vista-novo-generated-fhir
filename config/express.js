@@ -2,11 +2,20 @@
 var express = require('express');
 var provider = require('./mongoose.js')
 
-var app = module.exports = express.createServer();
+// create app object and setup as exported member of module
+var app = express();
 
 
 // setup routes
+app.get('/', function(req, res){
+    provider.findAll( function(error,collection){
+        res.render('index.eco', { 
+            locals: {
+                title: 'Model Index',
+                models: collection
+            }
+        });
+    })
+});
 
-
-//return express object
-return express;
+exports.app = app;
