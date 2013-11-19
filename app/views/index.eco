@@ -1,0 +1,7 @@
+<%= @title %>
+
+<p> There are <%= @models.length %> models. The list is: </p>
+<% for model in @models: %>
+  <a href="/<%= model %>"><%= model %></a>
+  <br/>
+<% end %>
