@@ -3,7 +3,7 @@ var _ = require('underscore');
 
 var ResourceHistorySchema = new mongoose.Schema({
   resourceType: String,
-  history: [{resourceId: ObjectId, createdAt: Date}]
+  history: [{resourceId: mongoose.Schema.Types.ObjectId, createdAt: Date}]
 });
 
 ResourceHistorySchema.methods = {
