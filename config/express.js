@@ -41,8 +41,15 @@ app.get('/:model', function(req,res){
 //show for model
 app.get('/:model/:id', function(req,res){
    var controller = require('../app/controllers/' + req.params.model)
-   controller.load(req,res,req.params.id,null, function() {
-      controller.show(req,res)
+   controller.load(req,res,req.params.id,null, function(obj) {
+      if(obj.constructor.name=="Error")
+      {
+        console.log("Got an error: " + obj)
+        res.render('test')
+      } else {
+        controller.show(req,res)
+      }
+      
    });
 });
 
