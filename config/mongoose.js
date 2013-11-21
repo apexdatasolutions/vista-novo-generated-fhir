@@ -7,16 +7,16 @@ var models = fs.readdirSync(models_path);
 
 // NOTE: some models seem to be broken. once fixed, the following code will work
 
-// models.forEach(function (file) {
-//   if (~file.indexOf('.js')) {
-//     console.log('Trying to require %s',file);
-//     require(models_path + '/' + file);
-//   }
-// });
+models.forEach(function (file) {
+  if (~file.indexOf('.js')) {
+    console.log('Trying to require %s',file);
+    require(models_path + '/' + file);
+  }
+});
 
 // For now, import model for testing
-require(models_path + '/adversereaction.js')
-require(models_path + '/resource_history.js')
+// require(models_path + '/adversereaction.js')
+// require(models_path + '/resource_history.js')
 
 exports.findAll = function(callback) {
   var temp = []

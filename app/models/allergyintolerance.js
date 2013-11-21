@@ -39,22 +39,22 @@ var AllergyIntoleranceSchema = new mongoose.Schema({
             value: String
         }
     },
-    reaction: [{
+    reaction: {
         type: {
             value: String
         },
         reference: {
             value: String
         }
-    }],
-    sensitivityTest: [{
+    },
+    sensitivityTest: {
         type: {
             value: String
         },
         reference: {
             value: String
         }
-    }]
+    }
 });
 
 mongoose.model('AllergyIntolerance', AllergyIntoleranceSchema);
