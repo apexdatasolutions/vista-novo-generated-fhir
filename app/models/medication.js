@@ -1,58 +1,32 @@
 var mongoose = require('mongoose');
 
 var MedicationSchema = new mongoose.Schema({
-    name: {
-        value: String
-    },
+    name: String,
     code: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    isBrand: {
-        value: Boolean
-    },
+    isBrand: Boolean,
     manufacturer: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    kind: {
-        value: String
-    },
+    kind: String,
     product: {
         form: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         ingredient: [{
             item: {
-                type: {
-                    value: String
-                },
-                reference: {
-                    value: String
-                }
+                reference: String,
+                display: String
             },
             amount: {
             }
@@ -61,39 +35,21 @@ var MedicationSchema = new mongoose.Schema({
     package: {
         container: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         content: [{
             item: {
-                type: {
-                    value: String
-                },
-                reference: {
-                    value: String
-                }
+                reference: String,
+                display: String
             },
             amount: {
-                value: {
-                    value: String
-                },
-                units: {
-                    value: String
-                },
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                }
+                value: String,
+                units: String,
+                system: String,
+                code: String
             }
         }]
     }

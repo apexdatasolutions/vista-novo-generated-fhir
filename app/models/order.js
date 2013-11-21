@@ -1,68 +1,38 @@
 var mongoose = require('mongoose');
 
 var OrderSchema = new mongoose.Schema({
-    date: {
-        value: Date
-    },
+    date: Date,
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     source: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     target: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    reason: {
-        value: String
-    },
+    reason: String,
     authority: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     when: {
         code: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         schedule: {
         }
     },
     detail: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }]
 });
 

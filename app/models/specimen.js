@@ -3,181 +3,95 @@ var mongoose = require('mongoose');
 var SpecimenSchema = new mongoose.Schema({
     identifier: {
     },
-    type: {
+    fhirType: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     source: [{
-        relationship: {
-            value: String
-        },
+        relationship: String,
         target: [{
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }]
     }],
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     accessionIdentifier: [{
     }],
-    receivedTime: {
-        value: Date
-    },
+    receivedTime: Date,
     collection: {
         collector: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
-        comment: [{
-            value: String
-        }],
-        collectedTime: {
-            value: Date
-        },
+        comment: String,
+        collectedTime: Date,
         quantity: {
-            value: {
-                value: String
-            },
-            units: {
-                value: String
-            },
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            }
+            value: String,
+            units: String,
+            system: String,
+            code: String
         },
         method: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         sourceSite: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }
     },
     treatment: [{
-        description: {
-            value: String
-        },
+        description: String,
         procedure: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         additive: [{
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }]
     }],
     container: [{
         identifier: [{
         }],
-        description: {
-            value: String
-        },
-        type: {
+        description: String,
+        fhirType: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         capacity: {
-            value: {
-                value: String
-            },
-            units: {
-                value: String
-            },
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            }
+            value: String,
+            units: String,
+            system: String,
+            code: String
         },
         specimenQuantity: {
-            value: {
-                value: String
-            },
-            units: {
-                value: String
-            },
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            }
+            value: String,
+            units: String,
+            system: String,
+            code: String
         },
         additive: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }
     }]
 });

@@ -2,26 +2,14 @@ var mongoose = require('mongoose');
 
 var OperationOutcomeSchema = new mongoose.Schema({
     issue: [{
-        severity: {
-            value: String
+        severity: String,
+        fhirType: {
+            system: String,
+            code: String,
+            display: String
         },
-        type: {
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
-        },
-        details: {
-            value: String
-        },
-        location: [{
-            value: String
-        }]
+        details: String,
+        location: String,
     }]
 });
 

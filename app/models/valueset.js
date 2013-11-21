@@ -1,89 +1,41 @@
 var mongoose = require('mongoose');
 
 var ValueSetSchema = new mongoose.Schema({
-    identifier: {
-        value: String
-    },
-    version: {
-        value: String
-    },
-    name: {
-        value: String
-    },
-    publisher: {
-        value: String
-    },
+    identifier: String,
+    version: String,
+    name: String,
+    publisher: String,
     telecom: [{
     }],
-    description: {
-        value: String
-    },
-    copyright: {
-        value: String
-    },
-    status: {
-        value: String
-    },
-    experimental: {
-        value: Boolean
-    },
-    extensible: {
-        value: Boolean
-    },
-    date: {
-        value: Date
-    },
+    description: String,
+    copyright: String,
+    status: String,
+    experimental: Boolean,
+    extensible: Boolean,
+    date: Date,
     define: {
-        system: {
-            value: String
-        },
-        version: {
-            value: String
-        },
-        caseSensitive: {
-            value: Boolean
-        },
+        system: String,
+        version: String,
+        caseSensitive: Boolean,
         concept: [{
-            code: {
-                value: String
-            },
-            abstract: {
-                value: Boolean
-            },
-            display: {
-                value: String
-            },
-            definition: {
-                value: String
-            },
+            code: String,
+            abstract: Boolean,
+            display: String,
+            definition: String,
             concept: [{
             }]
         }]
     },
     compose: {
-        import: [{
-            value: String
-        }],
+        import: String,
         include: [{
-            system: {
-                value: String
-            },
-            version: {
-                value: String
-            },
-            code: [{
-                value: String
-            }],
+            system: String,
+            version: String,
+            code: String,
             filter: [{
-                property: {
-                    value: String
-                },
-                op: {
-                    value: String
-                },
-                value: {
-                    value: String
-                }
+                property: String,
+                op: String,
+                value: String,
             }]
         }],
         exclude: [{
@@ -92,19 +44,11 @@ var ValueSetSchema = new mongoose.Schema({
     expansion: {
         identifier: {
         },
-        timestamp: {
-            value: Date
-        },
+        timestamp: Date,
         contains: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            },
+            system: String,
+            code: String,
+            display: String,
             contains: [{
             }]
         }]

@@ -4,102 +4,56 @@ var MedicationStatementSchema = new mongoose.Schema({
     identifier: [{
     }],
     patient: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    wasNotGiven: {
-        value: Boolean
-    },
+    wasNotGiven: Boolean,
     reasonNotGiven: [{
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     }],
     whenGiven: {
     },
     medication: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     administrationDevice: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }],
     dosage: [{
         timing: {
         },
         site: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         route: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         method: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         quantity: {
-            value: {
-                value: String
-            },
-            units: {
-                value: String
-            },
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            }
+            value: String,
+            units: String,
+            system: String,
+            code: String
         },
         rate: {
         },

@@ -1,16 +1,10 @@
 var mongoose = require('mongoose');
 
 var ImagingStudySchema = new mongoose.Schema({
-    dateTime: {
-        value: Date
-    },
+    dateTime: Date,
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     uid: {
     },
@@ -19,120 +13,56 @@ var ImagingStudySchema = new mongoose.Schema({
     identifier: [{
     }],
     order: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }],
-    modality: [{
-        value: String
-    }],
+    modality: String,
     referrer: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    availability: {
-        value: String
-    },
-    url: {
-        value: String
-    },
-    numberOfSeries: {
-        value: Number
-    },
-    numberOfInstances: {
-        value: Number
-    },
-    clinicalInformation: {
-        value: String
-    },
+    availability: String,
+    url: String,
+    numberOfSeries: Number,
+    numberOfInstances: Number,
+    clinicalInformation: String,
     procedure: [{
-        system: {
-            value: String
-        },
-        code: {
-            value: String
-        },
-        display: {
-            value: String
-        }
+        system: String,
+        code: String,
+        display: String
     }],
     interpreter: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    description: {
-        value: String
-    },
+    description: String,
     series: [{
-        number: {
-            value: Number
-        },
-        modality: {
-            value: String
-        },
+        number: Number,
+        modality: String,
         uid: {
         },
-        description: {
-            value: String
-        },
-        numberOfInstances: {
-            value: Number
-        },
-        availability: {
-            value: String
-        },
-        url: {
-            value: String
-        },
+        description: String,
+        numberOfInstances: Number,
+        availability: String,
+        url: String,
         bodySite: {
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         },
-        dateTime: {
-            value: Date
-        },
+        dateTime: Date,
         instance: [{
-            number: {
-                value: Number
-            },
+            number: Number,
             uid: {
             },
             sopclass: {
             },
-            type: {
-                value: String
-            },
-            title: {
-                value: String
-            },
-            url: {
-                value: String
-            },
+            fhirType: String,
+            title: String,
+            url: String,
             attachment: {
-                type: {
-                    value: String
-                },
-                reference: {
-                    value: String
-                }
+                reference: String,
+                display: String
             }
         }]
     }]

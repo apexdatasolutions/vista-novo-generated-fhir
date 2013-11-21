@@ -1,191 +1,91 @@
 var mongoose = require('mongoose');
 
 var ProfileSchema = new mongoose.Schema({
-    identifier: {
-        value: String
-    },
-    version: {
-        value: String
-    },
-    name: {
-        value: String
-    },
-    publisher: {
-        value: String
-    },
+    identifier: String,
+    version: String,
+    name: String,
+    publisher: String,
     telecom: [{
     }],
-    description: {
-        value: String
-    },
+    description: String,
     code: [{
-        system: {
-            value: String
-        },
-        code: {
-            value: String
-        },
-        display: {
-            value: String
-        }
+        system: String,
+        code: String,
+        display: String
     }],
-    status: {
-        value: String
-    },
-    experimental: {
-        value: Boolean
-    },
-    date: {
-        value: Date
-    },
+    status: String,
+    experimental: Boolean,
+    date: Date,
     fhirVersion: {
     },
     structure: [{
-        type: {
-            value: String
-        },
-        name: {
-            value: String
-        },
-        publish: {
-            value: Boolean
-        },
-        purpose: {
-            value: String
-        },
+        fhirType: String,
+        name: String,
+        publish: Boolean,
+        purpose: String,
         element: [{
-            path: {
-                value: String
-            },
-            name: {
-                value: String
-            },
+            path: String,
+            name: String,
             slicing: {
                 discriminator: {
                 },
-                ordered: {
-                    value: Boolean
-                },
-                rules: {
-                    value: String
-                }
+                ordered: Boolean,
+                rules: String,
             },
             definition: {
-                short: {
-                    value: String
-                },
-                formal: {
-                    value: String
-                },
-                comments: {
-                    value: String
-                },
-                requirements: {
-                    value: String
-                },
-                synonym: [{
-                    value: String
+                short: String,
+                formal: String,
+                comments: String,
+                requirements: String,
+                synonym: String,
+                min: Number,
+                max: String,
+                fhirType: [{
+                    code: String,
+                    profile: String,
+                    aggregation: String,
                 }],
-                min: {
-                    value: Number
-                },
-                max: {
-                    value: String
-                },
-                type: [{
-                    code: {
-                        value: String
-                    },
-                    profile: {
-                        value: String
-                    },
-                    aggregation: [{
-                        value: String
-                    }]
-                }],
-                nameReference: {
-                    value: String
-                },
+                nameReference: String,
                 value: {
                 },
                 example: {
                 },
-                maxLength: {
-                    value: Number
-                },
+                maxLength: Number,
                 condition: [{
                 }],
                 constraint: [{
                     key: {
                     },
-                    name: {
-                        value: String
-                    },
-                    severity: {
-                        value: String
-                    },
-                    human: {
-                        value: String
-                    },
-                    xpath: {
-                        value: String
-                    }
+                    name: String,
+                    severity: String,
+                    human: String,
+                    xpath: String,
                 }],
-                mustSupport: {
-                    value: Boolean
-                },
-                isModifier: {
-                    value: Boolean
-                },
+                mustSupport: Boolean,
+                isModifier: Boolean,
                 binding: {
-                    name: {
-                        value: String
-                    },
-                    isExtensible: {
-                        value: Boolean
-                    },
-                    conformance: {
-                        value: String
-                    },
-                    description: {
-                        value: String
-                    },
-                    referenceUri: {
-                        value: String
-                    },
+                    name: String,
+                    isExtensible: Boolean,
+                    conformance: String,
+                    description: String,
+                    referenceUri: String,
                     referenceResource: {
-                        type: {
-                            value: String
-                        },
-                        reference: {
-                            value: String
-                        }
+                        reference: String,
+                        display: String
                     }
                 },
                 mapping: [{
-                    target: {
-                        value: String
-                    },
-                    map: {
-                        value: String
-                    }
+                    target: String,
+                    map: String,
                 }]
             }
         }]
     }],
     extensionDefn: [{
-        code: {
-            value: String
-        },
-        display: {
-            value: String
-        },
-        contextType: {
-            value: String
-        },
-        context: [{
-            value: String
-        }],
+        code: String,
+        display: String,
+        contextType: String,
+        context: String,
         definition: {
         }
     }]

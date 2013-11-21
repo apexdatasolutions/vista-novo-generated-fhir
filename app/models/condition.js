@@ -4,217 +4,113 @@ var ConditionSchema = new mongoose.Schema({
     identifier: [{
     }],
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     encounter: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     asserter: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    dateAsserted: {
-        value: Date
-    },
+    dateAsserted: Date,
     code: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     category: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    status: {
-        value: String
-    },
+    status: String,
     certainty: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     severity: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    onsetDate: {
-        value: Date
-    },
+    onsetDate: Date,
     onsetAge: {
-        value: {
-            value: String
-        },
-        units: {
-            value: String
-        },
-        system: {
-            value: String
-        },
-        code: {
-            value: String
-        }
+        value: String,
+        units: String,
+        system: String,
+        code: String
     },
-    abatementDate: {
-        value: Date
-    },
+    abatementDate: Date,
     abatementAge: {
-        value: {
-            value: String
-        },
-        units: {
-            value: String
-        },
-        system: {
-            value: String
-        },
-        code: {
-            value: String
-        }
+        value: String,
+        units: String,
+        system: String,
+        code: String
     },
-    abatementBoolean: {
-        value: Boolean
-    },
+    abatementBoolean: Boolean,
     stage: {
         summary: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         assessment: [{
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }]
     },
     evidence: [{
         code: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         detail: [{
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }]
     }],
     location: [{
         code: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
-        detail: {
-            value: String
-        }
+        detail: String,
     }],
     relatedItem: [{
-        type: {
-            value: String
-        },
+        fhirType: String,
         code: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         target: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }
     }],
-    notes: {
-        value: String
-    }
+    notes: String,
 });
 
 mongoose.model('Condition', ConditionSchema);

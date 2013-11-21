@@ -4,128 +4,70 @@ var ProcedureSchema = new mongoose.Schema({
     identifier: [{
     }],
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    type: {
+    fhirType: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     bodySite: [{
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     }],
     indication: [{
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     }],
     performer: [{
         person: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
         role: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }
     }],
     date: {
     },
     encounter: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    outcome: {
-        value: String
-    },
+    outcome: String,
     report: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }],
     complication: [{
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     }],
-    followUp: {
-        value: String
-    },
+    followUp: String,
     relatedItem: [{
-        type: {
-            value: String
-        },
+        fhirType: String,
         target: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }
     }],
-    notes: {
-        value: String
-    }
+    notes: String,
 });
 
 mongoose.model('Procedure', ProcedureSchema);

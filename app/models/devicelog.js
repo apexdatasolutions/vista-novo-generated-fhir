@@ -1,35 +1,19 @@
 var mongoose = require('mongoose');
 
 var DeviceLogSchema = new mongoose.Schema({
-    instant: {
-        value: Date
-    },
+    instant: Date,
     capabilities: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     item: [{
-        key: {
-            value: String
-        },
-        value: {
-            value: String
-        },
-        flag: [{
-            value: String
-        }]
+        key: String,
+        value: String,
+        flag: String,
     }]
 });
 

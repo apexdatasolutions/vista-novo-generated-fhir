@@ -3,222 +3,124 @@ var mongoose = require('mongoose');
 var EncounterSchema = new mongoose.Schema({
     identifier: [{
     }],
-    status: {
-        value: String
-    },
-    class: {
-        value: String
-    },
-    type: [{
+    status: String,
+    class: String,
+    fhirType: [{
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     }],
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     participant: [{
-        type: [{
-            value: String
-        }],
+        fhirType: String,
         practitioner: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }
     }],
     fulfills: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    start: {
-        value: Date
-    },
+    start: Date,
     length: {
     },
     reason: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     indication: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     priority: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     hospitalization: {
         preAdmissionIdentifier: {
         },
         origin: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
         admitSource: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         period: {
         },
         accomodation: [{
             bed: {
-                type: {
-                    value: String
-                },
-                reference: {
-                    value: String
-                }
+                reference: String,
+                display: String
             },
             period: {
             }
         }],
         diet: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         specialCourtesy: [{
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }],
         specialArrangement: [{
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }],
         destination: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
         dischargeDisposition: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
-        reAdmission: {
-            value: Boolean
-        }
+        reAdmission: Boolean,
     },
     location: [{
         location: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
         period: {
         }
     }],
     serviceProvider: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     partOf: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }
 });
 

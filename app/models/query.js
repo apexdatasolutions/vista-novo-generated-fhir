@@ -1,21 +1,13 @@
 var mongoose = require('mongoose');
 
 var QuerySchema = new mongoose.Schema({
-    identifier: {
-        value: String
-    },
+    identifier: String,
     parameter: [{
     }],
     response: {
-        identifier: {
-            value: String
-        },
-        outcome: {
-            value: String
-        },
-        total: {
-            value: Number
-        },
+        identifier: String,
+        outcome: String,
+        total: Number,
         parameter: [{
         }],
         first: [{
@@ -27,12 +19,8 @@ var QuerySchema = new mongoose.Schema({
         last: [{
         }],
         reference: [{
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }]
     }
 });

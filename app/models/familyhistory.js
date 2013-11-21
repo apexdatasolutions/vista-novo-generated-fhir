@@ -4,107 +4,55 @@ var FamilyHistorySchema = new mongoose.Schema({
     identifier: [{
     }],
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    note: {
-        value: String
-    },
+    note: String,
     relation: [{
-        name: {
-            value: String
-        },
+        name: String,
         relationship: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
-        deceasedBoolean: {
-            value: Boolean
-        },
+        deceasedBoolean: Boolean,
         deceasedAge: {
-            value: {
-                value: String
-            },
-            units: {
-                value: String
-            },
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            }
+            value: String,
+            units: String,
+            system: String,
+            code: String
         },
         deceasedRange: {
         },
-        deceasedString: {
-            value: String
-        },
-        note: {
-            value: String
-        },
+        deceasedString: String,
+        note: String,
         condition: [{
-            type: {
+            fhirType: {
                 coding: [{
-                    system: {
-                        value: String
-                    },
-                    code: {
-                        value: String
-                    },
-                    display: {
-                        value: String
-                    }
+                    system: String,
+                    code: String,
+                    display: String
                 }]
             },
             outcome: {
                 coding: [{
-                    system: {
-                        value: String
-                    },
-                    code: {
-                        value: String
-                    },
-                    display: {
-                        value: String
-                    }
+                    system: String,
+                    code: String,
+                    display: String
                 }]
             },
             onsetAge: {
-                value: {
-                    value: String
-                },
-                units: {
-                    value: String
-                },
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                }
+                value: String,
+                units: String,
+                system: String,
+                code: String
             },
             onsetRange: {
             },
-            onsetString: {
-                value: String
-            },
-            note: {
-                value: String
-            }
+            onsetString: String,
+            note: String,
         }]
     }]
 });

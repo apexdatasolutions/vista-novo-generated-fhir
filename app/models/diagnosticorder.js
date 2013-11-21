@@ -2,102 +2,54 @@ var mongoose = require('mongoose');
 
 var DiagnosticOrderSchema = new mongoose.Schema({
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     orderer: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     identifier: [{
     }],
     encounter: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    clinicalNotes: {
-        value: String
-    },
+    clinicalNotes: String,
     specimen: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }],
-    status: {
-        value: String
-    },
-    priority: {
-        value: String
-    },
+    status: String,
+    priority: String,
     event: [{
-        status: {
-            value: String
-        },
-        date: {
-            value: Date
-        },
+        status: String,
+        date: Date,
         actor: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }
     }],
     item: [{
         code: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         specimen: [{
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }],
         bodySite: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
-        status: {
-            value: String
-        },
+        status: String,
         event: [{
         }]
     }]

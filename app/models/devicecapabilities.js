@@ -1,114 +1,62 @@
 var mongoose = require('mongoose');
 
 var DeviceCapabilitiesSchema = new mongoose.Schema({
-    name: {
-        value: String
-    },
-    type: {
+    name: String,
+    fhirType: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    manufacturer: {
-        value: String
-    },
+    manufacturer: String,
     identity: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     virtualDevice: [{
         code: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         channel: [{
             code: {
                 coding: [{
-                    system: {
-                        value: String
-                    },
-                    code: {
-                        value: String
-                    },
-                    display: {
-                        value: String
-                    }
+                    system: String,
+                    code: String,
+                    display: String
                 }]
             },
             metric: [{
                 code: {
                     coding: [{
-                        system: {
-                            value: String
-                        },
-                        code: {
-                            value: String
-                        },
-                        display: {
-                            value: String
-                        }
+                        system: String,
+                        code: String,
+                        display: String
                     }]
                 },
-                key: {
-                    value: String
-                },
+                key: String,
                 info: {
-                    type: {
-                        value: String
-                    },
-                    units: {
-                        value: String
-                    },
-                    ucum: {
-                        value: String
-                    },
+                    fhirType: String,
+                    units: String,
+                    ucum: String,
                     template: {
                     },
-                    system: {
-                        value: String
-                    }
+                    system: String,
                 },
                 facet: [{
                     code: {
                         coding: [{
-                            system: {
-                                value: String
-                            },
-                            code: {
-                                value: String
-                            },
-                            display: {
-                                value: String
-                            }
+                            system: String,
+                            code: String,
+                            display: String
                         }]
                     },
-                    scale: {
-                        value: Number
-                    },
-                    key: {
-                        value: String
-                    },
+                    scale: Number,
+                    key: String,
                     info: {
                     }
                 }]

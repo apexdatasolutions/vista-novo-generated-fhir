@@ -1,23 +1,13 @@
 var mongoose = require('mongoose');
 
 var LocationSchema = new mongoose.Schema({
-    name: {
-        value: String
-    },
-    description: {
-        value: String
-    },
-    type: [{
+    name: String,
+    description: String,
+    fhirType: [{
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     }],
     telecom: {
@@ -25,34 +15,18 @@ var LocationSchema = new mongoose.Schema({
     address: {
     },
     position: {
-        longitude: {
-            value: Number
-        },
-        latitude: {
-            value: Number
-        },
-        altitude: {
-            value: Number
-        }
+        longitude: Number,
+        latitude: Number,
+        altitude: Number,
     },
     provider: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    active: {
-        value: Boolean
-    },
+    active: Boolean,
     partOf: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }
 });
 

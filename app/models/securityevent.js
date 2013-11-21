@@ -2,160 +2,82 @@ var mongoose = require('mongoose');
 
 var SecurityEventSchema = new mongoose.Schema({
     event: {
-        type: {
+        fhirType: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         subtype: [{
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }],
-        action: {
-            value: String
-        },
-        dateTime: {
-            value: Date
-        },
-        outcome: {
-            value: String
-        },
-        outcomeDesc: {
-            value: String
-        }
+        action: String,
+        dateTime: Date,
+        outcome: String,
+        outcomeDesc: String,
     },
     participant: [{
         role: [{
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }],
         reference: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
-        userId: {
-            value: String
-        },
-        authId: {
-            value: String
-        },
-        name: {
-            value: String
-        },
-        requestor: {
-            value: Boolean
-        },
+        userId: String,
+        authId: String,
+        name: String,
+        requestor: Boolean,
         media: {
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         },
         network: {
-            identifier: {
-                value: String
-            },
-            type: {
-                value: String
-            }
+            identifier: String,
+            fhirType: String,
         }
     }],
     source: {
-        site: {
-            value: String
-        },
-        identifier: {
-            value: String
-        },
-        type: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+        site: String,
+        identifier: String,
+        fhirType: [{
+            system: String,
+            code: String,
+            display: String
         }]
     },
     object: [{
         identifier: {
         },
         reference: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
-        type: {
-            value: String
-        },
-        role: {
-            value: String
-        },
-        lifecycle: {
-            value: String
-        },
+        fhirType: String,
+        role: String,
+        lifecycle: String,
         sensitivity: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
-        name: {
-            value: String
-        },
+        name: String,
         query: {
         },
         detail: [{
-            type: {
-                value: String
-            },
+            fhirType: String,
             value: {
             }
         }]

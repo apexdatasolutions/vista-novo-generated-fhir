@@ -3,91 +3,47 @@ var mongoose = require('mongoose');
 var GroupSchema = new mongoose.Schema({
     identifier: {
     },
-    type: {
-        value: String
-    },
-    actual: {
-        value: Boolean
-    },
+    fhirType: String,
+    actual: Boolean,
     code: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    name: {
-        value: String
-    },
-    quantity: {
-        value: Number
-    },
+    name: String,
+    quantity: Number,
     characteristic: [{
-        type: {
+        fhirType: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         valueCodeableConcept: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
-        valueString: {
-            value: String
-        },
-        valueBoolean: {
-            value: Boolean
-        },
+        valueString: String,
+        valueBoolean: Boolean,
         valueQuantity: {
-            value: {
-                value: String
-            },
-            units: {
-                value: String
-            },
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            }
+            value: String,
+            units: String,
+            system: String,
+            code: String
         },
         valueRange: {
         },
-        exclude: {
-            value: Boolean
-        }
+        exclude: Boolean,
     }],
     member: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }]
 });
 

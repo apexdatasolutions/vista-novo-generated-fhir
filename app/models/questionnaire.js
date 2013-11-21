@@ -1,152 +1,76 @@
 var mongoose = require('mongoose');
 
 var QuestionnaireSchema = new mongoose.Schema({
-    status: {
-        value: String
-    },
-    authored: {
-        value: Date
-    },
+    status: String,
+    authored: Date,
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     author: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     source: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     name: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     identifier: [{
     }],
     encounter: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     question: [{
         name: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
-        text: {
-            value: String
-        },
-        answerDecimal: {
-            value: Number
-        },
-        answerInteger: {
-            value: Number
-        },
-        answerBoolean: {
-            value: Boolean
-        },
-        answerDate: {
-            value: Date
-        },
-        answerString: {
-            value: String
-        },
-        answerDateTime: {
-            value: Date
-        },
-        answerInstant: {
-            value: Date
-        },
+        text: String,
+        answerDecimal: Number,
+        answerInteger: Number,
+        answerBoolean: Boolean,
+        answerDate: Date,
+        answerString: String,
+        answerDateTime: Date,
+        answerInstant: Date,
         choice: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }],
-        optionsUri: {
-            value: String
-        },
+        optionsUri: String,
         optionsResource: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
         data: {
         },
-        remarks: {
-            value: String
-        }
+        remarks: String,
     }],
     group: [{
         name: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
-        header: {
-            value: String
-        },
-        text: {
-            value: String
-        },
+        header: String,
+        text: String,
         subject: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
         question: [{
         }],

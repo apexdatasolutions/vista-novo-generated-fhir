@@ -2,119 +2,63 @@ var mongoose = require('mongoose');
 
 var ImmunizationRecommendationSchema = new mongoose.Schema({
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     recommendation: [{
-        recommendationDate: {
-            value: Date
-        },
+        recommendationDate: Date,
         vaccineType: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
-        doseNumber: {
-            value: Number
-        },
-        forecastStatus: {
-            value: String
-        },
+        doseNumber: Number,
+        forecastStatus: String,
         dateCriterion: [{
             code: {
                 coding: [{
-                    system: {
-                        value: String
-                    },
-                    code: {
-                        value: String
-                    },
-                    display: {
-                        value: String
-                    }
+                    system: String,
+                    code: String,
+                    display: String
                 }]
             },
-            value: {
-                value: Date
-            }
+            value: Date,
         }],
         protocol: {
-            doseSequence: {
-                value: Number
-            },
-            description: {
-                value: String
-            },
+            doseSequence: Number,
+            description: String,
             authority: {
-                type: {
-                    value: String
-                },
-                reference: {
-                    value: String
-                }
+                reference: String,
+                display: String
             },
-            series: {
-                value: String
-            }
+            series: String,
         },
         supportingImmunization: [{
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }],
         supportingAdverseEventReport: [{
             identifier: [{
             }],
             reportType: {
                 coding: [{
-                    system: {
-                        value: String
-                    },
-                    code: {
-                        value: String
-                    },
-                    display: {
-                        value: String
-                    }
+                    system: String,
+                    code: String,
+                    display: String
                 }]
             },
-            reportDate: {
-                value: Date
-            },
-            text: {
-                value: String
-            },
+            reportDate: Date,
+            text: String,
             reaction: [{
-                type: {
-                    value: String
-                },
-                reference: {
-                    value: String
-                }
+                reference: String,
+                display: String
             }]
         }],
         supportingPatientObservation: [{
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }]
     }]
 });

@@ -3,63 +3,33 @@ var mongoose = require('mongoose');
 var AdverseReactionSchema = new mongoose.Schema({
     identifier: [{
     }],
-    reactionDate: {
-        value: Date
-    },
+    reactionDate: Date,
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    didNotOccurFlag: {
-        value: Boolean
-    },
+    didNotOccurFlag: Boolean,
     recorder: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     symptom: [{
         code: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
-        severity: {
-            value: String
-        }
+        severity: String,
     }],
     exposure: [{
-        exposureDate: {
-            value: Date
-        },
-        exposureType: {
-            value: String
-        },
-        causalityExpectation: {
-            value: String
-        },
+        exposureDate: Date,
+        exposureType: String,
+        causalityExpectation: String,
         substance: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }
     }]
 });

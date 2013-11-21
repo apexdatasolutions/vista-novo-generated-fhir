@@ -3,20 +3,12 @@ var mongoose = require('mongoose');
 var OrganizationSchema = new mongoose.Schema({
     identifier: [{
     }],
-    name: {
-        value: String
-    },
-    type: {
+    name: String,
+    fhirType: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     telecom: [{
@@ -24,25 +16,15 @@ var OrganizationSchema = new mongoose.Schema({
     address: [{
     }],
     partOf: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     contact: [{
         purpose: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         name: {
@@ -53,21 +35,13 @@ var OrganizationSchema = new mongoose.Schema({
         },
         gender: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }
     }],
-    active: {
-        value: Boolean
-    }
+    active: Boolean,
 });
 
 mongoose.model('Organization', OrganizationSchema);

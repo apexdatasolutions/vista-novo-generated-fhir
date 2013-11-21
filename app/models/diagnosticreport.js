@@ -1,38 +1,22 @@
 var mongoose = require('mongoose');
 
 var DiagnosticReportSchema = new mongoose.Schema({
-    status: {
-        value: String
-    },
-    issued: {
-        value: Date
-    },
+    status: String,
+    issued: Date,
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     performer: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     reportId: {
     },
     requestDetail: [{
         encounter: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
         requestOrderId: {
         },
@@ -40,115 +24,63 @@ var DiagnosticReportSchema = new mongoose.Schema({
         },
         requestTest: [{
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }],
         bodySite: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         requester: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
-        clinicalInfo: {
-            value: String
-        }
+        clinicalInfo: String,
     }],
     serviceCategory: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    diagnosticDateTime: {
-        value: Date
-    },
+    diagnosticDateTime: Date,
     diagnosticPeriod: {
     },
     results: {
         name: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         specimen: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
         group: [{
         }],
         result: [{
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }]
     },
     image: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }],
-    conclusion: {
-        value: String
-    },
+    conclusion: String,
     codedDiagnosis: [{
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     }],
     representation: [{

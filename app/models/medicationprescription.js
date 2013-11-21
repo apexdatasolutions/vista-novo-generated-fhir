@@ -3,133 +3,71 @@ var mongoose = require('mongoose');
 var MedicationPrescriptionSchema = new mongoose.Schema({
     identifier: [{
     }],
-    dateWritten: {
-        value: Date
-    },
-    status: {
-        value: String
-    },
+    dateWritten: Date,
+    status: String,
     patient: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     prescriber: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     encounter: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     reasonForPrescribing: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     medication: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     dosageInstruction: [{
-        dosageInstructionsText: {
-            value: String
-        },
+        dosageInstructionsText: String,
         additionalInstructions: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
-        timingDateTime: {
-            value: Date
-        },
+        timingDateTime: Date,
         timingPeriod: {
         },
         timingSchedule: {
         },
         site: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         route: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         method: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         doseQuantity: {
-            value: {
-                value: String
-            },
-            units: {
-                value: String
-            },
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            }
+            value: String,
+            units: String,
+            system: String,
+            code: String
         },
         rate: {
         },
@@ -138,60 +76,34 @@ var MedicationPrescriptionSchema = new mongoose.Schema({
     }],
     dispense: {
         medication: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
         validityPeriod: {
         },
-        numberOfRepeatsAllowed: {
-            value: Number
-        },
+        numberOfRepeatsAllowed: Number,
         quantity: {
-            value: {
-                value: String
-            },
-            units: {
-                value: String
-            },
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            }
+            value: String,
+            units: String,
+            system: String,
+            code: String
         },
         expectedSupplyDuration: {
         }
     },
     substitution: {
-        type: {
+        fhirType: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         reason: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }
     }

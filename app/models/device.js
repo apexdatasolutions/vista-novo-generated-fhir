@@ -3,66 +3,34 @@ var mongoose = require('mongoose');
 var DeviceSchema = new mongoose.Schema({
     identifier: [{
     }],
-    type: {
+    fhirType: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    manufacturer: {
-        value: String
-    },
-    model: {
-        value: String
-    },
-    version: {
-        value: String
-    },
-    expiry: {
-        value: Date
-    },
-    udi: {
-        value: String
-    },
-    lotNumber: {
-        value: String
-    },
+    manufacturer: String,
+    model: String,
+    version: String,
+    expiry: Date,
+    udi: String,
+    lotNumber: String,
     owner: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     location: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     patient: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     contact: [{
     }],
-    url: {
-        value: String
-    }
+    url: String,
 });
 
 mongoose.model('Device', DeviceSchema);

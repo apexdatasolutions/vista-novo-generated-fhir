@@ -1,63 +1,37 @@
 var mongoose = require('mongoose');
 
 var DeviceDataSchema = new mongoose.Schema({
-    instant: {
-        value: Date
-    },
+    instant: Date,
     identifier: {
     },
     source: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     virtualDevice: [{
         code: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         channel: [{
             code: {
                 coding: [{
-                    system: {
-                        value: String
-                    },
-                    code: {
-                        value: String
-                    },
-                    display: {
-                        value: String
-                    }
+                    system: String,
+                    code: String,
+                    display: String
                 }]
             },
             metric: [{
                 observation: {
-                    type: {
-                        value: String
-                    },
-                    reference: {
-                        value: String
-                    }
+                    reference: String,
+                    display: String
                 }
             }]
         }]

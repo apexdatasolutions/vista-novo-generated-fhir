@@ -2,99 +2,51 @@ var mongoose = require('mongoose');
 
 var ProvenanceSchema = new mongoose.Schema({
     target: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }],
     period: {
     },
-    recorded: {
-        value: Date
-    },
+    recorded: Date,
     reason: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     location: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    policy: [{
-        value: String
-    }],
+    policy: String,
     agent: [{
         role: {
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         },
-        type: {
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+        fhirType: {
+            system: String,
+            code: String,
+            display: String
         },
-        reference: {
-            value: String
-        },
-        display: {
-            value: String
-        }
+        reference: String,
+        display: String,
     }],
     entity: [{
-        role: {
-            value: String
+        role: String,
+        fhirType: {
+            system: String,
+            code: String,
+            display: String
         },
-        type: {
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
-        },
-        reference: {
-            value: String
-        },
-        display: {
-            value: String
-        },
+        reference: String,
+        display: String,
         agent: {
         }
     }],
-    signature: {
-        value: String
-    }
+    signature: String,
 });
 
 mongoose.model('Provenance', ProvenanceSchema);

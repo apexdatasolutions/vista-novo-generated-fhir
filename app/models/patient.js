@@ -9,61 +9,33 @@ var PatientSchema = new mongoose.Schema({
     }],
     gender: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    birthDate: {
-        value: Date
-    },
-    deceasedBoolean: {
-        value: Boolean
-    },
-    deceasedDateTime: {
-        value: Date
-    },
+    birthDate: Date,
+    deceasedBoolean: Boolean,
+    deceasedDateTime: Date,
     address: [{
     }],
     maritalStatus: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    multipleBirthBoolean: {
-        value: Boolean
-    },
-    multipleBirthInteger: {
-        value: Number
-    },
+    multipleBirthBoolean: Boolean,
+    multipleBirthInteger: Number,
     photo: [{
     }],
     contact: [{
         relationship: [{
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }],
         name: {
@@ -74,99 +46,55 @@ var PatientSchema = new mongoose.Schema({
         },
         gender: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         organization: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }
     }],
     animal: {
         species: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         breed: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         genderStatus: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }
     },
     communication: [{
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     }],
     provider: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     link: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }],
-    active: {
-        value: Boolean
-    }
+    active: Boolean,
 });
 
 mongoose.model('Patient', PatientSchema);

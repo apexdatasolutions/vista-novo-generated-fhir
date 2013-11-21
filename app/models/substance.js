@@ -3,73 +3,39 @@ var mongoose = require('mongoose');
 var SubstanceSchema = new mongoose.Schema({
     identifier: {
     },
-    name: {
-        value: String
-    },
-    type: {
+    name: String,
+    fhirType: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    description: {
-        value: String
-    },
+    description: String,
     status: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     effectiveTime: {
     },
     quantity: {
-        value: {
-            value: String
-        },
-        units: {
-            value: String
-        },
-        system: {
-            value: String
-        },
-        code: {
-            value: String
-        }
+        value: String,
+        units: String,
+        system: String,
+        code: String
     },
     ingredient: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }],
     quantityMode: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     }
 });

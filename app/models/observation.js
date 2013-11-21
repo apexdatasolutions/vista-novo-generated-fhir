@@ -3,42 +3,22 @@ var mongoose = require('mongoose');
 var ObservationSchema = new mongoose.Schema({
     name: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     valueQuantity: {
-        value: {
-            value: String
-        },
-        units: {
-            value: String
-        },
-        system: {
-            value: String
-        },
-        code: {
-            value: String
-        }
+        value: String,
+        units: String,
+        system: String,
+        code: String
     },
     valueCodeableConcept: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     valueAttachment: {
@@ -49,156 +29,82 @@ var ObservationSchema = new mongoose.Schema({
     },
     valueSampledData: {
     },
-    valueString: {
-        value: String
-    },
+    valueString: String,
     interpretation: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    comments: {
-        value: String
-    },
+    comments: String,
     appliesPeriod: {
     },
-    appliesDateTime: {
-        value: Date
-    },
-    issued: {
-        value: Date
-    },
-    status: {
-        value: String
-    },
-    reliability: {
-        value: String
-    },
+    appliesDateTime: Date,
+    issued: Date,
+    status: String,
+    reliability: String,
     bodySite: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     method: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     identifier: {
     },
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     performer: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     referenceRange: [{
         meaning: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         rangeQuantity: {
-            value: {
-                value: String
-            },
-            units: {
-                value: String
-            },
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            }
+            value: String,
+            units: String,
+            system: String,
+            code: String
         },
         rangeRange: {
         },
-        rangeString: {
-            value: String
-        }
+        rangeString: String,
     }],
     component: [{
         name: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         valueQuantity: {
-            value: {
-                value: String
-            },
-            units: {
-                value: String
-            },
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            }
+            value: String,
+            units: String,
+            system: String,
+            code: String
         },
         valueCodeableConcept: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         valueAttachment: {
@@ -209,9 +115,7 @@ var ObservationSchema = new mongoose.Schema({
         },
         valueSampledData: {
         },
-        valueString: {
-            value: String
-        }
+        valueString: String,
     }]
 });
 

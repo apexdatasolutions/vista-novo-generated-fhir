@@ -4,183 +4,95 @@ var CarePlanSchema = new mongoose.Schema({
     identifier: [{
     }],
     patient: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    status: {
-        value: String
-    },
+    status: String,
     period: {
     },
-    modified: {
-        value: Date
-    },
+    modified: Date,
     concern: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }],
     participant: [{
         role: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         member: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }
     }],
     goal: [{
-        description: {
-            value: String
-        },
-        status: {
-            value: String
-        },
-        notes: {
-            value: String
-        },
+        description: String,
+        status: String,
+        notes: String,
         concern: [{
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }]
     }],
     activity: [{
         goal: [{
         }],
-        status: {
-            value: String
-        },
-        prohibited: {
-            value: Boolean
-        },
+        status: String,
+        prohibited: Boolean,
         actionResulting: [{
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }],
-        notes: {
-            value: String
-        },
+        notes: String,
         detail: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
         simple: {
-            category: {
-                value: String
-            },
+            category: String,
             code: {
                 coding: [{
-                    system: {
-                        value: String
-                    },
-                    code: {
-                        value: String
-                    },
-                    display: {
-                        value: String
-                    }
+                    system: String,
+                    code: String,
+                    display: String
                 }]
             },
             timingSchedule: {
             },
             timingPeriod: {
             },
-            timingString: {
-                value: String
-            },
+            timingString: String,
             location: {
-                type: {
-                    value: String
-                },
-                reference: {
-                    value: String
-                }
+                reference: String,
+                display: String
             },
             performer: [{
-                type: {
-                    value: String
-                },
-                reference: {
-                    value: String
-                }
+                reference: String,
+                display: String
             }],
             product: {
-                type: {
-                    value: String
-                },
-                reference: {
-                    value: String
-                }
+                reference: String,
+                display: String
             },
             dailyAmount: {
-                value: {
-                    value: String
-                },
-                units: {
-                    value: String
-                },
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                }
+                value: String,
+                units: String,
+                system: String,
+                code: String
             },
             quantity: {
-                value: {
-                    value: String
-                },
-                units: {
-                    value: String
-                },
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                }
+                value: String,
+                units: String,
+                system: String,
+                code: String
             },
-            details: {
-                value: String
-            }
+            details: String,
         }
     }],
-    notes: {
-        value: String
-    }
+    notes: String,
 });
 
 mongoose.model('CarePlan', CarePlanSchema);

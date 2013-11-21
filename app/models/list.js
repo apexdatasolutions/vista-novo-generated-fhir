@@ -3,82 +3,42 @@ var mongoose = require('mongoose');
 var ListSchema = new mongoose.Schema({
     code: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     source: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    date: {
-        value: Date
-    },
-    ordered: {
-        value: Boolean
-    },
-    mode: {
-        value: String
-    },
+    date: Date,
+    ordered: Boolean,
+    mode: String,
     entry: [{
         flag: [{
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }],
-        deleted: {
-            value: Boolean
-        },
-        date: {
-            value: Date
-        },
+        deleted: Boolean,
+        date: Date,
         item: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }
     }],
     emptyReason: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     }
 });

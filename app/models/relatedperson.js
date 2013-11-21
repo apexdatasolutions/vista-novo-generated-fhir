@@ -4,24 +4,14 @@ var RelatedPersonSchema = new mongoose.Schema({
     identifier: [{
     }],
     patient: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     relationship: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     name: {
@@ -30,15 +20,9 @@ var RelatedPersonSchema = new mongoose.Schema({
     }],
     gender: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     address: {

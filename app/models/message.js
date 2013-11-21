@@ -3,119 +3,63 @@ var mongoose = require('mongoose');
 var MessageSchema = new mongoose.Schema({
     identifier: {
     },
-    timestamp: {
-        value: Date
-    },
+    timestamp: Date,
     event: {
-        system: {
-            value: String
-        },
-        code: {
-            value: String
-        },
-        display: {
-            value: String
-        }
+        system: String,
+        code: String,
+        display: String
     },
     response: {
         identifier: {
         },
-        code: {
-            value: String
-        },
+        code: String,
         details: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }
     },
     source: {
-        name: {
-            value: String
-        },
-        software: {
-            value: String
-        },
-        version: {
-            value: String
-        },
+        name: String,
+        software: String,
+        version: String,
         contact: {
         },
-        endpoint: {
-            value: String
-        }
+        endpoint: String,
     },
     destination: [{
-        name: {
-            value: String
-        },
+        name: String,
         target: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
-        endpoint: {
-            value: String
-        }
+        endpoint: String,
     }],
     enterer: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     author: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     receiver: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     responsible: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     reason: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     data: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }]
 });
 

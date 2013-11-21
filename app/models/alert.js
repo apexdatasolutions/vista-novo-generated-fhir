@@ -3,39 +3,21 @@ var mongoose = require('mongoose');
 var AlertSchema = new mongoose.Schema({
     category: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    status: {
-        value: String
-    },
+    status: String,
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     author: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    note: {
-        value: String
-    }
+    note: String,
 });
 
 mongoose.model('Alert', AlertSchema);

@@ -1,216 +1,110 @@
 var mongoose = require('mongoose');
 
 var ImmunizationSchema = new mongoose.Schema({
-    date: {
-        value: Date
-    },
+    date: Date,
     vaccineType: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    refusedIndicator: {
-        value: Boolean
-    },
-    reported: {
-        value: Boolean
-    },
+    refusedIndicator: Boolean,
+    reported: Boolean,
     performer: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     requester: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     manufacturer: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     location: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    lotNumber: {
-        value: String
-    },
-    expirationDate: {
-        value: Date
-    },
+    lotNumber: String,
+    expirationDate: Date,
     site: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     route: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     doseQuantity: {
-        value: {
-            value: String
-        },
-        units: {
-            value: String
-        },
-        system: {
-            value: String
-        },
-        code: {
-            value: String
-        }
+        value: String,
+        units: String,
+        system: String,
+        code: String
     },
     explanation: {
         reason: [{
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }],
         refusalReason: [{
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }]
     },
     reaction: [{
-        date: {
-            value: Date
-        },
+        date: Date,
         detail: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
-        reported: {
-            value: Boolean
-        }
+        reported: Boolean,
     }],
     vaccinationProtocol: {
-        doseSequence: {
-            value: Number
-        },
-        description: {
-            value: String
-        },
+        doseSequence: Number,
+        description: String,
         authority: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         },
-        series: {
-            value: String
-        },
-        seriesDoses: {
-            value: Number
-        },
+        series: String,
+        seriesDoses: Number,
         doseTarget: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         doseStatus: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
         doseStatusReason: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }
     }

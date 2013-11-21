@@ -6,193 +6,99 @@ var DocumentReferenceSchema = new mongoose.Schema({
     identifier: [{
     }],
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    type: {
+    fhirType: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     subtype: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     author: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }],
     custodian: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    policyManager: {
-        value: String
-    },
+    policyManager: String,
     authenticator: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    created: {
-        value: Date
-    },
-    indexed: {
-        value: Date
-    },
-    status: {
-        value: String
-    },
+    created: Date,
+    indexed: Date,
+    status: String,
     docStatus: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     supercedes: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    description: {
-        value: String
-    },
+    description: String,
     confidentiality: [{
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     }],
-    primaryLanguage: {
-        value: String
-    },
-    mimeType: {
-        value: String
-    },
+    primaryLanguage: String,
+    mimeType: String,
     format: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    size: {
-        value: Number
-    },
-    hash: {
-        value: String
-    },
-    location: {
-        value: String
-    },
+    size: Number,
+    hash: String,
+    location: String,
     service: {
-        type: {
+        fhirType: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         },
-        address: {
-            value: String
-        },
+        address: String,
         parameter: [{
-            name: {
-                value: String
-            },
-            value: {
-                value: String
-            }
+            name: String,
+            value: String,
         }]
     },
     context: {
         code: [{
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }],
         period: {
         },
         facilityType: {
             coding: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }]
         }
     }

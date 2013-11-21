@@ -1,248 +1,120 @@
 var mongoose = require('mongoose');
 
 var ConformanceSchema = new mongoose.Schema({
-    identifier: {
-        value: String
-    },
-    version: {
-        value: String
-    },
-    name: {
-        value: String
-    },
-    publisher: {
-        value: String
-    },
+    identifier: String,
+    version: String,
+    name: String,
+    publisher: String,
     telecom: [{
     }],
-    description: {
-        value: String
-    },
-    status: {
-        value: String
-    },
-    experimental: {
-        value: Boolean
-    },
-    date: {
-        value: Date
-    },
+    description: String,
+    status: String,
+    experimental: Boolean,
+    date: Date,
     software: {
-        name: {
-            value: String
-        },
-        version: {
-            value: String
-        },
-        releaseDate: {
-            value: Date
-        }
+        name: String,
+        version: String,
+        releaseDate: Date,
     },
     implementation: {
-        description: {
-            value: String
-        },
-        url: {
-            value: String
-        }
+        description: String,
+        url: String,
     },
     fhirVersion: {
     },
-    acceptUnknown: {
-        value: Boolean
-    },
-    format: [{
-        value: String
-    }],
+    acceptUnknown: Boolean,
+    format: String,
     profile: [{
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     }],
     rest: [{
-        mode: {
-            value: String
-        },
-        documentation: {
-            value: String
-        },
+        mode: String,
+        documentation: String,
         security: {
-            cors: {
-                value: Boolean
-            },
+            cors: Boolean,
             service: [{
                 coding: [{
-                    system: {
-                        value: String
-                    },
-                    code: {
-                        value: String
-                    },
-                    display: {
-                        value: String
-                    }
+                    system: String,
+                    code: String,
+                    display: String
                 }]
             }],
-            description: {
-                value: String
-            },
+            description: String,
             certificate: [{
-                type: {
-                    value: String
-                },
+                fhirType: String,
                 blob: {
                 }
             }]
         },
         resource: [{
-            type: {
-                value: String
-            },
+            fhirType: String,
             profile: {
-                type: {
-                    value: String
-                },
-                reference: {
-                    value: String
-                }
+                reference: String,
+                display: String
             },
             operation: [{
-                code: {
-                    value: String
-                },
-                documentation: {
-                    value: String
-                }
+                code: String,
+                documentation: String,
             }],
-            readHistory: {
-                value: Boolean
-            },
-            updateCreate: {
-                value: Boolean
-            },
-            searchInclude: [{
-                value: String
-            }],
+            readHistory: Boolean,
+            updateCreate: Boolean,
+            searchInclude: String,
             searchParam: [{
-                name: {
-                    value: String
-                },
-                source: {
-                    value: String
-                },
-                type: {
-                    value: String
-                },
-                documentation: {
-                    value: String
-                },
-                xpath: {
-                    value: String
-                },
-                target: [{
-                    value: String
-                }],
-                chain: [{
-                    value: String
-                }]
+                name: String,
+                source: String,
+                fhirType: String,
+                documentation: String,
+                xpath: String,
+                target: String,
+                chain: String,
             }]
         }],
         operation: [{
-            code: {
-                value: String
-            },
-            documentation: {
-                value: String
-            }
+            code: String,
+            documentation: String,
         }],
         query: [{
-            name: {
-                value: String
-            },
-            documentation: {
-                value: String
-            },
+            name: String,
+            documentation: String,
             parameter: [{
             }]
         }]
     }],
     messaging: [{
-        endpoint: {
-            value: String
-        },
-        reliableCache: {
-            value: Number
-        },
-        documentation: {
-            value: String
-        },
+        endpoint: String,
+        reliableCache: Number,
+        documentation: String,
         event: [{
             code: {
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             },
-            mode: {
-                value: String
-            },
+            mode: String,
             protocol: [{
-                system: {
-                    value: String
-                },
-                code: {
-                    value: String
-                },
-                display: {
-                    value: String
-                }
+                system: String,
+                code: String,
+                display: String
             }],
-            focus: {
-                value: String
-            },
+            focus: String,
             request: {
-                type: {
-                    value: String
-                },
-                reference: {
-                    value: String
-                }
+                reference: String,
+                display: String
             },
             response: {
-                type: {
-                    value: String
-                },
-                reference: {
-                    value: String
-                }
+                reference: String,
+                display: String
             },
-            documentation: {
-                value: String
-            }
+            documentation: String,
         }]
     }],
     document: [{
-        mode: {
-            value: String
-        },
-        documentation: {
-            value: String
-        },
+        mode: String,
+        documentation: String,
         profile: {
-            type: {
-                value: String
-            },
-            reference: {
-                value: String
-            }
+            reference: String,
+            display: String
         }
     }]
 });

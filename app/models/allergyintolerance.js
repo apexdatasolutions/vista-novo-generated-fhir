@@ -3,58 +3,30 @@ var mongoose = require('mongoose');
 var AllergyIntoleranceSchema = new mongoose.Schema({
     identifier: [{
     }],
-    criticality: {
-        value: String
-    },
-    sensitivityType: {
-        value: String
-    },
-    recordedDate: {
-        value: Date
-    },
-    status: {
-        value: String
-    },
+    criticality: String,
+    sensitivityType: String,
+    recordedDate: Date,
+    status: String,
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     recorder: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     substance: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    reaction: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
-    },
-    sensitivityTest: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
-    }
+    reaction: [{
+        reference: String,
+        display: String
+    }],
+    sensitivityTest: [{
+        reference: String,
+        display: String
+    }]
 });
 
 mongoose.model('AllergyIntolerance', AllergyIntoleranceSchema);

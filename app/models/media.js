@@ -1,71 +1,37 @@
 var mongoose = require('mongoose');
 
 var MediaSchema = new mongoose.Schema({
-    type: {
-        value: String
-    },
+    fhirType: String,
     subtype: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     identifier: [{
     }],
-    dateTime: {
-        value: Date
-    },
+    dateTime: Date,
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     operator: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     view: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
-    deviceName: {
-        value: String
-    },
-    height: {
-        value: Number
-    },
-    width: {
-        value: Number
-    },
-    frames: {
-        value: Number
-    },
-    length: {
-        value: Number
-    },
+    deviceName: String,
+    height: Number,
+    width: Number,
+    frames: Number,
+    length: Number,
     content: {
     }
 });

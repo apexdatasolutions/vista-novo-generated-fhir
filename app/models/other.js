@@ -3,36 +3,20 @@ var mongoose = require('mongoose');
 var OtherSchema = new mongoose.Schema({
     code: {
         coding: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            display: {
-                value: String
-            }
+            system: String,
+            code: String,
+            display: String
         }]
     },
     subject: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     author: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
-    created: {
-        value: Date
-    }
+    created: Date,
 });
 
 mongoose.model('Other', OtherSchema);

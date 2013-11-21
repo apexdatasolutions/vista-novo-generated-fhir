@@ -1,74 +1,34 @@
 var mongoose = require('mongoose');
 
 var ConceptMapSchema = new mongoose.Schema({
-    identifier: {
-        value: String
-    },
-    version: {
-        value: String
-    },
-    name: {
-        value: String
-    },
-    publisher: {
-        value: String
-    },
+    identifier: String,
+    version: String,
+    name: String,
+    publisher: String,
     telecom: [{
     }],
-    description: {
-        value: String
-    },
-    copyright: {
-        value: String
-    },
-    status: {
-        value: String
-    },
-    experimental: {
-        value: Boolean
-    },
-    date: {
-        value: Date
-    },
+    description: String,
+    copyright: String,
+    status: String,
+    experimental: Boolean,
+    date: Date,
     source: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     target: {
-        type: {
-            value: String
-        },
-        reference: {
-            value: String
-        }
+        reference: String,
+        display: String
     },
     concept: [{
-        name: {
-            value: String
-        },
-        system: {
-            value: String
-        },
-        code: {
-            value: String
-        },
+        name: String,
+        system: String,
+        code: String,
         map: [{
-            system: {
-                value: String
-            },
-            code: {
-                value: String
-            },
-            equivalence: {
-                value: String
-            },
-            comments: {
-                value: String
-            }
+            system: String,
+            code: String,
+            equivalence: String,
+            comments: String,
         }],
         concept: [{
         }]
