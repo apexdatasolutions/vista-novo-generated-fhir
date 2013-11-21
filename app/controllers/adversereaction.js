@@ -4,7 +4,7 @@ var AdverseReaction = mongoose.model('AdverseReaction');
 var ResourceHistory = mongoose.model('ResourceHistory');
 var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helper');
 
-exports.load = function(req, res, next, id, vid) {
+exports.load = function(req, res, id, vid, next) {
   ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
     if (rhErr) {
       return next(rhErr);
@@ -33,6 +33,15 @@ exports.load = function(req, res, next, id, vid) {
     else {
       return next(new Error('Could not find any resource history'));
     }        
+  });
+};
+
+exports.list = function(req, res) {
+  var query = AdverseReaction.find();
+  query.find(function(error,results){
+    res.render('adversereaction/index', {
+      records: results
+    });
   });
 };
 
