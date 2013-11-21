@@ -23,7 +23,7 @@ exports.load = function(req, res, id, vid, next) {
         }
         if(adversereaction !== null) {
           req.adversereaction = adversereaction;
-          return next();
+          return next(adversereaction);
         }
         else {
           return next(new Error('AdverseReaction not found'));
