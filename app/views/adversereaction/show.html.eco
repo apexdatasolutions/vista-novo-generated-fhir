@@ -1,0 +1,3 @@
+We did it!
+
+Here is the record id:<%= @adversereaction %>

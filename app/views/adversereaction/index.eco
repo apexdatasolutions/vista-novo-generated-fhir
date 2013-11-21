@@ -1,0 +1,9 @@
+<h1>Adverse Reactions</h1>
+
+<a href='/adversereaction/new'>New</a>
+<br/>
+<br/>
+<% for obj in @records: %>
+  <a href= "<%='/adversereaction/' + obj.id%>" > ID: <%= obj.id %></a>
+<% end %>
+
