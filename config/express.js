@@ -32,10 +32,24 @@ app.get('/', function(req, res){
 
 //index for model
 app.get('/:model', function(req,res){
-   res.render('test', {
-       model: req.params.model
-   });
+   var controller = require('../app/controllers/' + req.params.model)
+   controller.list(req,res)
+   
     
+});
+
+//show for model
+app.get('/:model/:id', function(req,res){
+   var controller = require('../app/controllers/' + req.params.model)
+   controller.load(req,res,req.params.id,null, function() {
+      controller.show(req,res)
+   });
+});
+
+//new for model
+app.get('/:model/new', function(req,res){
+   var controller = require('../app/controllers/' + req.params.model)
+   controller.new(req,res)
 });
 
 exports.app = app;
