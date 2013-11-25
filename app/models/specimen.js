@@ -24,7 +24,7 @@ var SpecimenSchema = new mongoose.Schema({
     accessionIdentifier: [{
     }],
     receivedTime: Date,
-    collection: {
+    fhirCollection: {
         collector: {
             reference: String,
             display: String
