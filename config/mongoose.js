@@ -9,7 +9,7 @@ var models = fs.readdirSync(models_path);
 
 models.forEach(function (file) {
   if (~file.indexOf('.js')) {
-    console.log('Trying to require %s',file);
+    //console.log('Trying to require %s',file);
     require(models_path + '/' + file);
   }
 });

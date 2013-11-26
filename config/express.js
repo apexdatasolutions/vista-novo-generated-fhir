@@ -20,7 +20,7 @@ app.set('views', __dirname + '/../app/views');
 
 // setup routes
 
-// root url
+// root url(not necessary)
 app.get('/', function(req, res){
     provider.findAll( function(error,collection){
         res.render('index', { 
@@ -30,7 +30,7 @@ app.get('/', function(req, res){
     })
 });
 
-//index for model
+//index for model(not necessary)
 app.get('/:model', function(req,res){
    var controller = require('../app/controllers/' + req.params.model)
    controller.list(req,res)
@@ -39,13 +39,13 @@ app.get('/:model', function(req,res){
 });
 
 //show for model
-app.get('/:model/:id', function(req,res){
+app.get('/:model/:id/:vid', function(req,res){
    var controller = require('../app/controllers/' + req.params.model)
-   controller.load(req,res,req.params.id,null, function(obj) {
+   controller.load(req,res,req.params.id,req.params.vid, function(obj) {
       if(obj.constructor.name=="Error")
       {
         console.log("Got an error: " + obj)
-        res.render('test')
+        res.send(500)
       } else {
         controller.show(req,res)
       }
@@ -53,10 +53,39 @@ app.get('/:model/:id', function(req,res){
    });
 });
 
-//new for model
-app.get('/:model/new', function(req,res){
+//create for model
+app.get('/:model/create', function(req,res){
    var controller = require('../app/controllers/' + req.params.model)
-   controller.new(req,res)
+   controller.create(req,res)
+});
+
+//update for model
+app.put('/:model/update/:id/:vid', function(req,res){
+   var controller = require('../app/controllers/' + req.params.model)
+   controller.load(req,res,req.params.id,req.params.vid, function(obj) {
+     if(obj.constructor.name=="Error")
+     {
+       console.log("Got an error: " + obj)
+       res.send(500)
+     } else {
+       controller.update(req,res)
+     }
+   });
+});
+
+//destroy for model
+app.delete('/:model/destroy/:id/:vid', function(req,res){
+  var controller = require('../app/controllers/' + req.params.model)
+  controller.load(req,res,req.params.id,req.params.vid, function(obj) {
+    if(obj.constructor.name=="Error")
+    {
+      console.log("Got an error: " + obj)
+      res.send(500)
+    } else {
+      controller.destroy(req,res)
+    }
+  });
+  
 });
 
 exports.app = app;
