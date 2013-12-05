@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var _ = require('underscore');
+var fs = require('fs');
+var eco = require('eco');
+var async = require('async');
 var Patient = mongoose.model('Patient');
 var ResourceHistory = mongoose.model('ResourceHistory');
 var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helper');
@@ -9,7 +12,7 @@ exports.load = function(req, res, id, vid, next) {
     req.resourceHistory.findLatest(function(err, patient) {
       req.patient = patient;
       next(patient);
-    }); 
+    });
   } else {
     ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
       if (rhErr) {
@@ -21,7 +24,7 @@ exports.load = function(req, res, id, vid, next) {
           req.patient = patient;
           next(patient);
         });
-      }       
+      }
     });
   }
 };
@@ -79,6 +82,31 @@ exports.destroy = function(req, res) {
       res.send(500);
     } else {
       res.send(204);
+    }
+  });
+};
+
+exports.list = function(req, res) {
+  var models = [];
+  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
+
+  ResourceHistory.find({resourceType:"Patient"}, function (rhErr, histories) {
+    if (rhErr) {
+      return next(rhErr);
+    }
+    if (histories !== null) {
+      async.forEach(histories, function(history, callback) {
+        history.findLatest( function(err, patient) {
+          models.push(patient);
+          callback();
+        });
+      }, function(err) {
+          console.log(models);
+          res.send(eco.render(template, models));
+      });
+    } else {
+      console.log('no patients found');
+      res.send(500);
     }
   });
 };
