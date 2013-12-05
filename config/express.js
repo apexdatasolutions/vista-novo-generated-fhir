@@ -14,10 +14,7 @@ app.engine('eco', cons.eco);
 app.set('view engine', 'eco');
 app.set('views', __dirname + '/../app/views');
 
-
-
-
-
+var patientServiceInvoker = require(__dirname + '/../lib/patient_service_invoker');
 // setup routes
 
 // root url(not necessary)
@@ -40,7 +37,7 @@ app.get('/:model', function(req,res){
 
 //show for model
 app.get('/:model/:id/:vid', function(req,res){
-   var controller = require('../app/controllers/' + req.params.model)
+   var controller = require('../app/controllers/' + req.params.model)   
    controller.load(req,res,req.params.id,req.params.vid, function(obj) {
       if(obj.constructor.name=="Error")
       {
@@ -87,5 +84,7 @@ app.delete('/:model/destroy/:id/:vid', function(req,res){
   });
   
 });
+
+app.param('model', patientServiceInvoker.checkPatientCache);
 
 exports.app = app;
