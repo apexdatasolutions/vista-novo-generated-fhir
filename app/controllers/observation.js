@@ -4,42 +4,32 @@ var Observation = mongoose.model('Observation');
 var ResourceHistory = mongoose.model('ResourceHistory');
 var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helper');
 
-exports.load = function(req, res, next, id, vid) {
-  ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
-    if (rhErr) {
-      return next(rhErr);
-    }
-    if(resourceHistory !== null) {
-      req.resourceHistory = resourceHistory;
-      var lookUpId = null;
-      if (vid !== null) {
-        lookUpId = vid;
-      } else {
-        lookUpId = resourceHistory.latestVersionId();
+exports.load = function(req, res, id, vid, next) {
+  if (req.resourceHistory) {
+    req.resourceHistory.findLatest(function(err, observation) {
+      req.observation = observation;
+      next(observation);
+    }); 
+  } else {
+    ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
+      if (rhErr) {
+        next(rhErr);
       }
-      Observation.findOne(lookUpId, function(modelErr, observation) {
-        if (modelErr) {
-          return next(modelErr);
-        }
-        if(observation !== null) {
+      if(resourceHistory !== null) {
+        req.resourceHistory = resourceHistory;
+        req.resourceHistory.findLatest(function(err, observation) {
           req.observation = observation;
-          return next();
-        }
-        else {
-          return next(new Error('Observation not found'));
-        }
-      });
-    }
-    else {
-      return next(new Error('Could not find any resource history'));
-    }        
-  });
+          next(observation);
+        });
+      }       
+    });
+  }
 };
 
 exports.show = function(req, res) {
   var observation = req.observation;
-  var locals = {observation: observation};
-  res.format(ResponseFormatHelper.buildFormatHash('observation', locals, res));
+  var json = JSON.stringify(observation);
+  res.send(json);
 };
 
 exports.create = function(req, res) {

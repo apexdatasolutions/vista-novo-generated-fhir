@@ -30,7 +30,7 @@ ResourceHistorySchema.statics = {
     var self = this;
     async.waterfall([
       function(callback) {
-        self.findOne({vistaId: resourceId, resourceType: resourceType}, function(err, resourceHistory) {
+        self.findOne({vistaId: resourceId, "resourceType": resourceType}, function(err, resourceHistory) {
           callback(err, resourceHistory);
         });
       },
@@ -38,7 +38,7 @@ ResourceHistorySchema.statics = {
         if (resourceHistory) {
           callback(resourceHistory);
         } else {
-          self.findOne(resourceId, function(err, resourceHistory) {
+          self.findById(resourceId, function(err, resourceHistory) {
             callback(resourceHistory);
           });
         }

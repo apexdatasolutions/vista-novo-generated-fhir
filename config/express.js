@@ -15,6 +15,7 @@ app.set('view engine', 'eco');
 app.set('views', __dirname + '/../app/views');
 
 var patientServiceInvoker = require(__dirname + '/../lib/patient_service_invoker');
+var observationServiceInvoker = require(__dirname + '/../lib/observation_service_invoker');
 // setup routes
 
 // root url(not necessary)
@@ -86,5 +87,6 @@ app.delete('/:model/destroy/:id/:vid', function(req,res){
 });
 
 app.param('model', patientServiceInvoker.checkPatientCache);
+app.param('model', observationServiceInvoker.checkObservationCache);
 
 exports.app = app;
