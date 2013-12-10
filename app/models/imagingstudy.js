@@ -9,8 +9,16 @@ var ImagingStudySchema = new mongoose.Schema({
     uid: {
     },
     accessionNo: {
+        use: String,
+        label: String,
+        system: String,
+        value: String
     },
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     order: [{
         reference: String,

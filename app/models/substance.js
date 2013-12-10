@@ -1,9 +1,6 @@
 var mongoose = require('mongoose');
 
 var SubstanceSchema = new mongoose.Schema({
-    identifier: {
-    },
-    name: String,
     fhirType: {
         coding: [{
             system: String,
@@ -19,25 +16,29 @@ var SubstanceSchema = new mongoose.Schema({
             display: String
         }]
     },
-    effectiveTime: {
-    },
-    quantity: {
-        value: String,
-        units: String,
-        system: String,
-        code: String
+    instance: {
+        identifier: {
+            use: String,
+            label: String,
+            system: String,
+            value: String
+        },
+        expiry: Date,
+        quantity: {
+            value: String,
+            units: String,
+            system: String,
+            code: String
+        }
     },
     ingredient: [{
-        reference: String,
-        display: String
-    }],
-    quantityMode: {
-        coding: [{
-            system: String,
-            code: String,
+        quantity: {
+        },
+        substance: {
+            reference: String,
             display: String
-        }]
-    }
+        }
+    }]
 });
 
 mongoose.model('Substance', SubstanceSchema);

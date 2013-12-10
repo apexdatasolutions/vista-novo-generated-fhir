@@ -12,6 +12,10 @@ var DiagnosticReportSchema = new mongoose.Schema({
         display: String
     },
     reportId: {
+        use: String,
+        label: String,
+        system: String,
+        value: String
     },
     requestDetail: [{
         encounter: {
@@ -19,8 +23,16 @@ var DiagnosticReportSchema = new mongoose.Schema({
             display: String
         },
         requestOrderId: {
+            use: String,
+            label: String,
+            system: String,
+            value: String
         },
         receiverOrderId: {
+            use: String,
+            label: String,
+            system: String,
+            value: String
         },
         requestTest: [{
             coding: [{

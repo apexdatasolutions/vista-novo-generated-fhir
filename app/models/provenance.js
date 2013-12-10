@@ -46,7 +46,7 @@ var ProvenanceSchema = new mongoose.Schema({
         agent: {
         }
     }],
-    signature: String,
+    integritySignature: String,
 });
 
 mongoose.model('Provenance', ProvenanceSchema);

@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 var GroupSchema = new mongoose.Schema({
     identifier: {
+        use: String,
+        label: String,
+        system: String,
+        value: String
     },
     fhirType: String,
     actual: Boolean,
@@ -15,7 +19,7 @@ var GroupSchema = new mongoose.Schema({
     name: String,
     quantity: Number,
     characteristic: [{
-        fhirType: {
+        code: {
             coding: [{
                 system: String,
                 code: String,
@@ -29,7 +33,6 @@ var GroupSchema = new mongoose.Schema({
                 display: String
             }]
         },
-        valueString: String,
         valueBoolean: Boolean,
         valueQuantity: {
             value: String,

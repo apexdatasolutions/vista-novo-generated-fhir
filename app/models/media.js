@@ -10,6 +10,10 @@ var MediaSchema = new mongoose.Schema({
         }]
     },
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     dateTime: Date,
     subject: {

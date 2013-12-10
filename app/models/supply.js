@@ -9,6 +9,10 @@ var SupplySchema = new mongoose.Schema({
         }]
     },
     identifier: {
+        use: String,
+        label: String,
+        system: String,
+        value: String
     },
     status: String,
     orderedItem: {
@@ -21,6 +25,10 @@ var SupplySchema = new mongoose.Schema({
     },
     dispense: [{
         identifier: {
+            use: String,
+            label: String,
+            system: String,
+            value: String
         },
         status: String,
         fhirType: {

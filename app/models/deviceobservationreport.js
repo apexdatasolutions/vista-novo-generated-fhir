@@ -1,8 +1,12 @@
 var mongoose = require('mongoose');
 
-var DeviceDataSchema = new mongoose.Schema({
+var DeviceObservationReportSchema = new mongoose.Schema({
     instant: Date,
     identifier: {
+        use: String,
+        label: String,
+        system: String,
+        value: String
     },
     source: {
         reference: String,
@@ -38,4 +42,4 @@ var DeviceDataSchema = new mongoose.Schema({
     }]
 });
 
-mongoose.model('DeviceData', DeviceDataSchema);
+mongoose.model('DeviceObservationReport', DeviceObservationReportSchema);

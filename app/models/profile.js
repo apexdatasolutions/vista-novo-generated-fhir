@@ -18,6 +18,13 @@ var ProfileSchema = new mongoose.Schema({
     date: Date,
     fhirVersion: {
     },
+    mapping: [{
+        identity: {
+        },
+        uri: String,
+        name: String,
+        comments: String,
+    }],
     structure: [{
         fhirType: String,
         name: String,
@@ -25,6 +32,7 @@ var ProfileSchema = new mongoose.Schema({
         purpose: String,
         element: [{
             path: String,
+            representation: String,
             name: String,
             slicing: {
                 discriminator: {
@@ -75,7 +83,8 @@ var ProfileSchema = new mongoose.Schema({
                     }
                 },
                 mapping: [{
-                    target: String,
+                    identity: {
+                    },
                     map: String,
                 }]
             }

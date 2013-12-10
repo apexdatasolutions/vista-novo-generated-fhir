@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 var SpecimenSchema = new mongoose.Schema({
     identifier: {
+        use: String,
+        label: String,
+        system: String,
+        value: String
     },
     fhirType: {
         coding: [{
@@ -22,6 +26,10 @@ var SpecimenSchema = new mongoose.Schema({
         display: String
     },
     accessionIdentifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     receivedTime: Date,
     fhirCollection: {
@@ -68,6 +76,10 @@ var SpecimenSchema = new mongoose.Schema({
     }],
     container: [{
         identifier: [{
+            use: String,
+            label: String,
+            system: String,
+            value: String
         }],
         description: String,
         fhirType: {

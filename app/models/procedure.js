@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 var ProcedureSchema = new mongoose.Schema({
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     subject: {
         reference: String,

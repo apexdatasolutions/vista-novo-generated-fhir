@@ -1,11 +1,13 @@
 var mongoose = require('mongoose');
 
-var DocumentSchema = new mongoose.Schema({
+var CompositionSchema = new mongoose.Schema({
     identifier: {
+        use: String,
+        label: String,
+        system: String,
+        value: String
     },
-    versionIdentifier: {
-    },
-    created: Date,
+    instant: Date,
     fhirType: {
         coding: [{
             system: String,
@@ -13,7 +15,7 @@ var DocumentSchema = new mongoose.Schema({
             display: String
         }]
     },
-    subtype: {
+    class: {
         coding: [{
             system: String,
             code: String,
@@ -66,16 +68,6 @@ var DocumentSchema = new mongoose.Schema({
         reference: String,
         display: String
     },
-    replaces: {
-    },
-    provenance: [{
-        reference: String,
-        display: String
-    }],
-    stylesheet: {
-    },
-    representation: {
-    },
     section: [{
         code: {
             coding: [{
@@ -97,4 +89,4 @@ var DocumentSchema = new mongoose.Schema({
     }]
 });
 
-mongoose.model('Document', DocumentSchema);
+mongoose.model('Composition', CompositionSchema);

@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 var OrganizationSchema = new mongoose.Schema({
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     name: String,
     fhirType: {
@@ -28,6 +32,12 @@ var OrganizationSchema = new mongoose.Schema({
             }]
         },
         name: {
+            use: String,
+            text: String,
+            family: [String],
+            given: [String],
+            prefix: [String],
+            suffix: [String]
         },
         telecom: [{
         }],
@@ -40,6 +50,10 @@ var OrganizationSchema = new mongoose.Schema({
                 display: String
             }]
         }
+    }],
+    location: [{
+        reference: String,
+        display: String
     }],
     active: Boolean,
 });

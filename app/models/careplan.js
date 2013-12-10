@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 var CarePlanSchema = new mongoose.Schema({
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     patient: {
         reference: String,

@@ -23,42 +23,16 @@ var QuestionnaireSchema = new mongoose.Schema({
         }]
     },
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     encounter: {
         reference: String,
         display: String
     },
-    question: [{
-        name: {
-            coding: [{
-                system: String,
-                code: String,
-                display: String
-            }]
-        },
-        text: String,
-        answerDecimal: Number,
-        answerInteger: Number,
-        answerBoolean: Boolean,
-        answerDate: Date,
-        answerString: String,
-        answerDateTime: Date,
-        answerInstant: Date,
-        choice: [{
-            system: String,
-            code: String,
-            display: String
-        }],
-        optionsUri: String,
-        optionsResource: {
-            reference: String,
-            display: String
-        },
-        data: {
-        },
-        remarks: String,
-    }],
-    group: [{
+    group: {
         name: {
             coding: [{
                 system: String,
@@ -68,15 +42,45 @@ var QuestionnaireSchema = new mongoose.Schema({
         },
         header: String,
         text: String,
+        ordered: Boolean,
         subject: {
             reference: String,
             display: String
         },
-        question: [{
-        }],
         group: [{
+        }],
+        question: [{
+            name: {
+                coding: [{
+                    system: String,
+                    code: String,
+                    display: String
+                }]
+            },
+            text: String,
+            answerDecimal: Number,
+            answerInteger: Number,
+            answerBoolean: Boolean,
+            answerDate: Date,
+            answerString: String,
+            answerDateTime: Date,
+            answerInstant: Date,
+            choice: [{
+                system: String,
+                code: String,
+                display: String
+            }],
+            options: {
+                reference: String,
+                display: String
+            },
+            data: {
+            },
+            remarks: String,
+            group: [{
+            }]
         }]
-    }]
+    }
 });
 
 mongoose.model('Questionnaire', QuestionnaireSchema);

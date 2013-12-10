@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 var DeviceSchema = new mongoose.Schema({
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     fhirType: {
         coding: [{

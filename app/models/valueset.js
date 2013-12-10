@@ -43,6 +43,10 @@ var ValueSetSchema = new mongoose.Schema({
     },
     expansion: {
         identifier: {
+            use: String,
+            label: String,
+            system: String,
+            value: String
         },
         timestamp: Date,
         contains: [{

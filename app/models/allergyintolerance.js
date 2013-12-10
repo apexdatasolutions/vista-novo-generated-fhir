@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 var AllergyIntoleranceSchema = new mongoose.Schema({
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     criticality: String,
     sensitivityType: String,

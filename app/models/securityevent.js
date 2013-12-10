@@ -34,7 +34,7 @@ var SecurityEventSchema = new mongoose.Schema({
             display: String
         },
         userId: String,
-        authId: String,
+        altId: String,
         name: String,
         requestor: Boolean,
         media: {
@@ -58,6 +58,10 @@ var SecurityEventSchema = new mongoose.Schema({
     },
     object: [{
         identifier: {
+            use: String,
+            label: String,
+            system: String,
+            value: String
         },
         reference: {
             reference: String,
@@ -74,6 +78,7 @@ var SecurityEventSchema = new mongoose.Schema({
             }]
         },
         name: String,
+        description: String,
         query: {
         },
         detail: [{

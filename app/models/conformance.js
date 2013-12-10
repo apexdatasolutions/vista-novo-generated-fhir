@@ -79,7 +79,8 @@ var ConformanceSchema = new mongoose.Schema({
             documentation: String,
             parameter: [{
             }]
-        }]
+        }],
+        documentMailbox: String,
     }],
     messaging: [{
         endpoint: String,
@@ -91,6 +92,7 @@ var ConformanceSchema = new mongoose.Schema({
                 code: String,
                 display: String
             },
+            category: String,
             mode: String,
             protocol: [{
                 system: String,

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var MessageSchema = new mongoose.Schema({
+var MessageHeaderSchema = new mongoose.Schema({
     identifier: {
     },
     timestamp: Date,
@@ -63,4 +63,4 @@ var MessageSchema = new mongoose.Schema({
     }]
 });
 
-mongoose.model('Message', MessageSchema);
+mongoose.model('MessageHeader', MessageHeaderSchema);

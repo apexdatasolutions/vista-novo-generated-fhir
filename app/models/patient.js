@@ -2,8 +2,18 @@ var mongoose = require('mongoose');
 
 var PatientSchema = new mongoose.Schema({
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     name: [{
+        use: String,
+        text: String,
+        family: [String],
+        given: [String],
+        prefix: [String],
+        suffix: [String]
     }],
     telecom: [{
     }],
@@ -39,6 +49,12 @@ var PatientSchema = new mongoose.Schema({
             }]
         }],
         name: {
+            use: String,
+            text: String,
+            family: [String],
+            given: [String],
+            prefix: [String],
+            suffix: [String]
         },
         telecom: [{
         }],
@@ -86,13 +102,20 @@ var PatientSchema = new mongoose.Schema({
             display: String
         }]
     }],
-    provider: {
+    careProvider: [{
+        reference: String,
+        display: String
+    }],
+    managingOrganization: {
         reference: String,
         display: String
     },
     link: [{
-        reference: String,
-        display: String
+        other: {
+            reference: String,
+            display: String
+        },
+        fhirType: String,
     }],
     active: Boolean,
 });

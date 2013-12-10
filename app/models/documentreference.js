@@ -2,8 +2,16 @@ var mongoose = require('mongoose');
 
 var DocumentReferenceSchema = new mongoose.Schema({
     masterIdentifier: {
+        use: String,
+        label: String,
+        system: String,
+        value: String
     },
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     subject: {
         reference: String,
@@ -16,7 +24,7 @@ var DocumentReferenceSchema = new mongoose.Schema({
             display: String
         }]
     },
-    subtype: {
+    class: {
         coding: [{
             system: String,
             code: String,
@@ -46,10 +54,13 @@ var DocumentReferenceSchema = new mongoose.Schema({
             display: String
         }]
     },
-    supercedes: {
-        reference: String,
-        display: String
-    },
+    relatesTo: [{
+        code: String,
+        target: {
+            reference: String,
+            display: String
+        }
+    }],
     description: String,
     confidentiality: [{
         coding: [{
@@ -85,7 +96,7 @@ var DocumentReferenceSchema = new mongoose.Schema({
         }]
     },
     context: {
-        code: [{
+        event: [{
             coding: [{
                 system: String,
                 code: String,

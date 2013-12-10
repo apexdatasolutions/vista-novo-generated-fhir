@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 var EncounterSchema = new mongoose.Schema({
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     status: String,
     class: String,
@@ -17,17 +21,20 @@ var EncounterSchema = new mongoose.Schema({
         display: String
     },
     participant: [{
-        fhirType: String,
-        practitioner: {
+        fhirType: [{
+            coding: [{
+                system: String,
+                code: String,
+                display: String
+            }]
+        }],
+        individual: {
             reference: String,
             display: String
         }
     }],
-    fulfills: {
-        reference: String,
-        display: String
+    period: {
     },
-    start: Date,
     length: {
     },
     reason: {
@@ -50,6 +57,10 @@ var EncounterSchema = new mongoose.Schema({
     },
     hospitalization: {
         preAdmissionIdentifier: {
+            use: String,
+            label: String,
+            system: String,
+            value: String
         },
         origin: {
             reference: String,
@@ -103,6 +114,10 @@ var EncounterSchema = new mongoose.Schema({
                 code: String,
                 display: String
             }]
+        },
+        dischargeDiagnosis: {
+            reference: String,
+            display: String
         },
         reAdmission: Boolean,
     },

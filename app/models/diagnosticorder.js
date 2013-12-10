@@ -10,6 +10,10 @@ var DiagnosticOrderSchema = new mongoose.Schema({
         display: String
     },
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     encounter: {
         reference: String,

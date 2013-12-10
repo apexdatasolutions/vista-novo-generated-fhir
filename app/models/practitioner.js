@@ -2,8 +2,18 @@ var mongoose = require('mongoose');
 
 var PractitionerSchema = new mongoose.Schema({
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     name: {
+        use: String,
+        text: String,
+        family: [String],
+        given: [String],
+        prefix: [String],
+        suffix: [String]
     },
     telecom: [{
     }],
@@ -39,6 +49,10 @@ var PractitionerSchema = new mongoose.Schema({
     }],
     period: {
     },
+    location: [{
+        reference: String,
+        display: String
+    }],
     qualification: [{
         code: {
             coding: [{

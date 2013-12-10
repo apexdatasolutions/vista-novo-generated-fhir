@@ -1,8 +1,18 @@
 var mongoose = require('mongoose');
 
 var DocumentManifestSchema = new mongoose.Schema({
-    identifier: {
+    masterIdentifier: {
+        use: String,
+        label: String,
+        system: String,
+        value: String
     },
+    identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
+    }],
     subject: [{
         reference: String,
         display: String

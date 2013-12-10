@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 var MedicationDispenseSchema = new mongoose.Schema({
     identifier: {
+        use: String,
+        label: String,
+        system: String,
+        value: String
     },
     status: String,
     patient: {
@@ -18,6 +22,10 @@ var MedicationDispenseSchema = new mongoose.Schema({
     }],
     dispense: [{
         identifier: {
+            use: String,
+            label: String,
+            system: String,
+            value: String
         },
         status: String,
         fhirType: {

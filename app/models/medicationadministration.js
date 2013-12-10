@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 var MedicationAdministrationSchema = new mongoose.Schema({
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     status: String,
     patient: {

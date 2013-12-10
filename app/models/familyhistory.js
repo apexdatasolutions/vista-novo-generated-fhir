@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 var FamilyHistorySchema = new mongoose.Schema({
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     subject: {
         reference: String,
@@ -17,6 +21,10 @@ var FamilyHistorySchema = new mongoose.Schema({
                 display: String
             }]
         },
+        bornPeriod: {
+        },
+        bornDate: Date,
+        bornString: String,
         deceasedBoolean: Boolean,
         deceasedAge: {
             value: String,
@@ -26,6 +34,7 @@ var FamilyHistorySchema = new mongoose.Schema({
         },
         deceasedRange: {
         },
+        deceasedDate: Date,
         deceasedString: String,
         note: String,
         condition: [{

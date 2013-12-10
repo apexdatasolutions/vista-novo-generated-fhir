@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 
 var RelatedPersonSchema = new mongoose.Schema({
     identifier: [{
+        use: String,
+        label: String,
+        system: String,
+        value: String
     }],
     patient: {
         reference: String,
@@ -15,6 +19,12 @@ var RelatedPersonSchema = new mongoose.Schema({
         }]
     },
     name: {
+        use: String,
+        text: String,
+        family: [String],
+        given: [String],
+        prefix: [String],
+        suffix: [String]
     },
     telecom: [{
     }],
