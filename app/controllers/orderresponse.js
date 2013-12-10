@@ -1,45 +1,38 @@
 var mongoose = require('mongoose');
 var _ = require('underscore');
+var fs = require('fs');
+var eco = require('eco');
+var async = require('async');
 var OrderResponse = mongoose.model('OrderResponse');
 var ResourceHistory = mongoose.model('ResourceHistory');
 var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helper');
 
-exports.load = function(req, res, next, id, vid) {
-  ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
-    if (rhErr) {
-      return next(rhErr);
-    }
-    if(resourceHistory !== null) {
-      req.resourceHistory = resourceHistory;
-      var lookUpId = null;
-      if (vid !== null) {
-        lookUpId = vid;
-      } else {
-        lookUpId = resourceHistory.latestVersionId();
+exports.load = function(req, res, id, vid, next) {
+  if (req.resourceHistory) {
+    req.resourceHistory.findLatest(function(err, orderresponse) {
+      req.orderresponse = orderresponse;
+      next(orderresponse);
+    });
+  } else {
+    ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
+      if (rhErr) {
+        next(rhErr);
       }
-      OrderResponse.findOne(lookUpId, function(modelErr, orderresponse) {
-        if (modelErr) {
-          return next(modelErr);
-        }
-        if(orderresponse !== null) {
+      if(resourceHistory !== null) {
+        req.resourceHistory = resourceHistory;
+        req.resourceHistory.findLatest(function(err, orderresponse) {
           req.orderresponse = orderresponse;
-          return next();
-        }
-        else {
-          return next(new Error('OrderResponse not found'));
-        }
-      });
-    }
-    else {
-      return next(new Error('Could not find any resource history'));
-    }        
-  });
+          next(orderresponse);
+        });
+      }
+    });
+  }
 };
 
 exports.show = function(req, res) {
   var orderresponse = req.orderresponse;
-  var locals = {orderresponse: orderresponse};
-  res.format(ResponseFormatHelper.buildFormatHash('orderresponse', locals, res));
+  var json = JSON.stringify(orderresponse);
+  res.send(json);
 };
 
 exports.create = function(req, res) {
@@ -89,6 +82,31 @@ exports.destroy = function(req, res) {
       res.send(500);
     } else {
       res.send(204);
+    }
+  });
+};
+
+exports.list = function(req, res) {
+  var models = [];
+  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
+
+  ResourceHistory.find({resourceType:"OrderResponse"}, function (rhErr, histories) {
+    if (rhErr) {
+      return next(rhErr);
+    }
+    if (histories !== null) {
+      async.forEach(histories, function(history, callback) {
+        history.findLatest( function(err, orderresponse) {
+          models.push(orderresponse);
+          callback();
+        });
+      }, function(err) {
+          console.log(models);
+          res.send(eco.render(template, models));
+      });
+    } else {
+      console.log('no orderresponse found');
+      res.send(500);
     }
   });
 };

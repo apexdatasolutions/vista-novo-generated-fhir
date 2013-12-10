@@ -1,54 +1,38 @@
 var mongoose = require('mongoose');
 var _ = require('underscore');
+var fs = require('fs');
+var eco = require('eco');
+var async = require('async');
 var AdverseReaction = mongoose.model('AdverseReaction');
 var ResourceHistory = mongoose.model('ResourceHistory');
 var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helper');
 
 exports.load = function(req, res, id, vid, next) {
-  ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
-    if (rhErr) {
-      return next(rhErr);
-    }
-    if(resourceHistory !== null) {
-      req.resourceHistory = resourceHistory;
-      var lookUpId = null;
-      if (vid !== null) {
-        lookUpId = vid;
-      } else {
-        lookUpId = resourceHistory.latestVersionId();
-      }
-      AdverseReaction.findOne(lookUpId, function(modelErr, adversereaction) {
-        if (modelErr) {
-          return next(modelErr);
-        }
-        if(adversereaction !== null) {
-          req.adversereaction = adversereaction;
-          return next(adversereaction);
-        }
-        else {
-          return next(new Error('AdverseReaction not found'));
-        }
-      });
-    }
-    else {
-      return next(new Error('Could not find any resource history'));
-    }        
-  });
-};
-
-exports.list = function(req, res) {
-  var query = AdverseReaction.find();
-  query.find(function(error,results){
-    res.render('adversereaction/index', {
-      records: results
+  if (req.resourceHistory) {
+    req.resourceHistory.findLatest(function(err, adversereaction) {
+      req.adversereaction = adversereaction;
+      next(adversereaction);
     });
-  });
+  } else {
+    ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
+      if (rhErr) {
+        next(rhErr);
+      }
+      if(resourceHistory !== null) {
+        req.resourceHistory = resourceHistory;
+        req.resourceHistory.findLatest(function(err, adversereaction) {
+          req.adversereaction = adversereaction;
+          next(adversereaction);
+        });
+      }
+    });
+  }
 };
 
 exports.show = function(req, res) {
   var adversereaction = req.adversereaction;
-  var locals = {adversereaction: adversereaction};
-  res.format(ResponseFormatHelper.buildFormatHash('adversereaction', locals, res));
+  var json = JSON.stringify(adversereaction);
+  res.send(json);
 };
 
 exports.create = function(req, res) {
@@ -98,6 +82,31 @@ exports.destroy = function(req, res) {
       res.send(500);
     } else {
       res.send(204);
+    }
+  });
+};
+
+exports.list = function(req, res) {
+  var models = [];
+  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
+
+  ResourceHistory.find({resourceType:"AdverseReaction"}, function (rhErr, histories) {
+    if (rhErr) {
+      return next(rhErr);
+    }
+    if (histories !== null) {
+      async.forEach(histories, function(history, callback) {
+        history.findLatest( function(err, adversereaction) {
+          models.push(adversereaction);
+          callback();
+        });
+      }, function(err) {
+          console.log(models);
+          res.send(eco.render(template, models));
+      });
+    } else {
+      console.log('no adversereaction found');
+      res.send(500);
     }
   });
 };

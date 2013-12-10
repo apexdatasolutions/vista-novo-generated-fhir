@@ -1,45 +1,38 @@
 var mongoose = require('mongoose');
 var _ = require('underscore');
+var fs = require('fs');
+var eco = require('eco');
+var async = require('async');
 var Organization = mongoose.model('Organization');
 var ResourceHistory = mongoose.model('ResourceHistory');
 var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helper');
 
-exports.load = function(req, res, next, id, vid) {
-  ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
-    if (rhErr) {
-      return next(rhErr);
-    }
-    if(resourceHistory !== null) {
-      req.resourceHistory = resourceHistory;
-      var lookUpId = null;
-      if (vid !== null) {
-        lookUpId = vid;
-      } else {
-        lookUpId = resourceHistory.latestVersionId();
+exports.load = function(req, res, id, vid, next) {
+  if (req.resourceHistory) {
+    req.resourceHistory.findLatest(function(err, organization) {
+      req.organization = organization;
+      next(organization);
+    });
+  } else {
+    ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
+      if (rhErr) {
+        next(rhErr);
       }
-      Organization.findOne(lookUpId, function(modelErr, organization) {
-        if (modelErr) {
-          return next(modelErr);
-        }
-        if(organization !== null) {
+      if(resourceHistory !== null) {
+        req.resourceHistory = resourceHistory;
+        req.resourceHistory.findLatest(function(err, organization) {
           req.organization = organization;
-          return next();
-        }
-        else {
-          return next(new Error('Organization not found'));
-        }
-      });
-    }
-    else {
-      return next(new Error('Could not find any resource history'));
-    }        
-  });
+          next(organization);
+        });
+      }
+    });
+  }
 };
 
 exports.show = function(req, res) {
   var organization = req.organization;
-  var locals = {organization: organization};
-  res.format(ResponseFormatHelper.buildFormatHash('organization', locals, res));
+  var json = JSON.stringify(organization);
+  res.send(json);
 };
 
 exports.create = function(req, res) {
@@ -89,6 +82,31 @@ exports.destroy = function(req, res) {
       res.send(500);
     } else {
       res.send(204);
+    }
+  });
+};
+
+exports.list = function(req, res) {
+  var models = [];
+  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
+
+  ResourceHistory.find({resourceType:"Organization"}, function (rhErr, histories) {
+    if (rhErr) {
+      return next(rhErr);
+    }
+    if (histories !== null) {
+      async.forEach(histories, function(history, callback) {
+        history.findLatest( function(err, organization) {
+          models.push(organization);
+          callback();
+        });
+      }, function(err) {
+          console.log(models);
+          res.send(eco.render(template, models));
+      });
+    } else {
+      console.log('no organization found');
+      res.send(500);
     }
   });
 };

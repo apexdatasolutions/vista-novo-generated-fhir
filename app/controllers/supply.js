@@ -1,45 +1,38 @@
 var mongoose = require('mongoose');
 var _ = require('underscore');
+var fs = require('fs');
+var eco = require('eco');
+var async = require('async');
 var Supply = mongoose.model('Supply');
 var ResourceHistory = mongoose.model('ResourceHistory');
 var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helper');
 
-exports.load = function(req, res, next, id, vid) {
-  ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
-    if (rhErr) {
-      return next(rhErr);
-    }
-    if(resourceHistory !== null) {
-      req.resourceHistory = resourceHistory;
-      var lookUpId = null;
-      if (vid !== null) {
-        lookUpId = vid;
-      } else {
-        lookUpId = resourceHistory.latestVersionId();
+exports.load = function(req, res, id, vid, next) {
+  if (req.resourceHistory) {
+    req.resourceHistory.findLatest(function(err, supply) {
+      req.supply = supply;
+      next(supply);
+    });
+  } else {
+    ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
+      if (rhErr) {
+        next(rhErr);
       }
-      Supply.findOne(lookUpId, function(modelErr, supply) {
-        if (modelErr) {
-          return next(modelErr);
-        }
-        if(supply !== null) {
+      if(resourceHistory !== null) {
+        req.resourceHistory = resourceHistory;
+        req.resourceHistory.findLatest(function(err, supply) {
           req.supply = supply;
-          return next();
-        }
-        else {
-          return next(new Error('Supply not found'));
-        }
-      });
-    }
-    else {
-      return next(new Error('Could not find any resource history'));
-    }        
-  });
+          next(supply);
+        });
+      }
+    });
+  }
 };
 
 exports.show = function(req, res) {
   var supply = req.supply;
-  var locals = {supply: supply};
-  res.format(ResponseFormatHelper.buildFormatHash('supply', locals, res));
+  var json = JSON.stringify(supply);
+  res.send(json);
 };
 
 exports.create = function(req, res) {
@@ -89,6 +82,31 @@ exports.destroy = function(req, res) {
       res.send(500);
     } else {
       res.send(204);
+    }
+  });
+};
+
+exports.list = function(req, res) {
+  var models = [];
+  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
+
+  ResourceHistory.find({resourceType:"Supply"}, function (rhErr, histories) {
+    if (rhErr) {
+      return next(rhErr);
+    }
+    if (histories !== null) {
+      async.forEach(histories, function(history, callback) {
+        history.findLatest( function(err, supply) {
+          models.push(supply);
+          callback();
+        });
+      }, function(err) {
+          console.log(models);
+          res.send(eco.render(template, models));
+      });
+    } else {
+      console.log('no supply found');
+      res.send(500);
     }
   });
 };

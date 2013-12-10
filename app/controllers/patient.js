@@ -105,7 +105,7 @@ exports.list = function(req, res) {
           res.send(eco.render(template, models));
       });
     } else {
-      console.log('no patients found');
+      console.log('no patient found');
       res.send(500);
     }
   });

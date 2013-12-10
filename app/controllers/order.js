@@ -1,45 +1,38 @@
 var mongoose = require('mongoose');
 var _ = require('underscore');
+var fs = require('fs');
+var eco = require('eco');
+var async = require('async');
 var Order = mongoose.model('Order');
 var ResourceHistory = mongoose.model('ResourceHistory');
 var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helper');
 
-exports.load = function(req, res, next, id, vid) {
-  ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
-    if (rhErr) {
-      return next(rhErr);
-    }
-    if(resourceHistory !== null) {
-      req.resourceHistory = resourceHistory;
-      var lookUpId = null;
-      if (vid !== null) {
-        lookUpId = vid;
-      } else {
-        lookUpId = resourceHistory.latestVersionId();
+exports.load = function(req, res, id, vid, next) {
+  if (req.resourceHistory) {
+    req.resourceHistory.findLatest(function(err, order) {
+      req.order = order;
+      next(order);
+    });
+  } else {
+    ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
+      if (rhErr) {
+        next(rhErr);
       }
-      Order.findOne(lookUpId, function(modelErr, order) {
-        if (modelErr) {
-          return next(modelErr);
-        }
-        if(order !== null) {
+      if(resourceHistory !== null) {
+        req.resourceHistory = resourceHistory;
+        req.resourceHistory.findLatest(function(err, order) {
           req.order = order;
-          return next();
-        }
-        else {
-          return next(new Error('Order not found'));
-        }
-      });
-    }
-    else {
-      return next(new Error('Could not find any resource history'));
-    }        
-  });
+          next(order);
+        });
+      }
+    });
+  }
 };
 
 exports.show = function(req, res) {
   var order = req.order;
-  var locals = {order: order};
-  res.format(ResponseFormatHelper.buildFormatHash('order', locals, res));
+  var json = JSON.stringify(order);
+  res.send(json);
 };
 
 exports.create = function(req, res) {
@@ -89,6 +82,31 @@ exports.destroy = function(req, res) {
       res.send(500);
     } else {
       res.send(204);
+    }
+  });
+};
+
+exports.list = function(req, res) {
+  var models = [];
+  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
+
+  ResourceHistory.find({resourceType:"Order"}, function (rhErr, histories) {
+    if (rhErr) {
+      return next(rhErr);
+    }
+    if (histories !== null) {
+      async.forEach(histories, function(history, callback) {
+        history.findLatest( function(err, order) {
+          models.push(order);
+          callback();
+        });
+      }, function(err) {
+          console.log(models);
+          res.send(eco.render(template, models));
+      });
+    } else {
+      console.log('no order found');
+      res.send(500);
     }
   });
 };

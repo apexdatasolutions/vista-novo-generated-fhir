@@ -1,45 +1,38 @@
 var mongoose = require('mongoose');
 var _ = require('underscore');
+var fs = require('fs');
+var eco = require('eco');
+var async = require('async');
 var DocumentReference = mongoose.model('DocumentReference');
 var ResourceHistory = mongoose.model('ResourceHistory');
 var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helper');
 
-exports.load = function(req, res, next, id, vid) {
-  ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
-    if (rhErr) {
-      return next(rhErr);
-    }
-    if(resourceHistory !== null) {
-      req.resourceHistory = resourceHistory;
-      var lookUpId = null;
-      if (vid !== null) {
-        lookUpId = vid;
-      } else {
-        lookUpId = resourceHistory.latestVersionId();
+exports.load = function(req, res, id, vid, next) {
+  if (req.resourceHistory) {
+    req.resourceHistory.findLatest(function(err, documentreference) {
+      req.documentreference = documentreference;
+      next(documentreference);
+    });
+  } else {
+    ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
+      if (rhErr) {
+        next(rhErr);
       }
-      DocumentReference.findOne(lookUpId, function(modelErr, documentreference) {
-        if (modelErr) {
-          return next(modelErr);
-        }
-        if(documentreference !== null) {
+      if(resourceHistory !== null) {
+        req.resourceHistory = resourceHistory;
+        req.resourceHistory.findLatest(function(err, documentreference) {
           req.documentreference = documentreference;
-          return next();
-        }
-        else {
-          return next(new Error('DocumentReference not found'));
-        }
-      });
-    }
-    else {
-      return next(new Error('Could not find any resource history'));
-    }        
-  });
+          next(documentreference);
+        });
+      }
+    });
+  }
 };
 
 exports.show = function(req, res) {
   var documentreference = req.documentreference;
-  var locals = {documentreference: documentreference};
-  res.format(ResponseFormatHelper.buildFormatHash('documentreference', locals, res));
+  var json = JSON.stringify(documentreference);
+  res.send(json);
 };
 
 exports.create = function(req, res) {
@@ -89,6 +82,31 @@ exports.destroy = function(req, res) {
       res.send(500);
     } else {
       res.send(204);
+    }
+  });
+};
+
+exports.list = function(req, res) {
+  var models = [];
+  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
+
+  ResourceHistory.find({resourceType:"DocumentReference"}, function (rhErr, histories) {
+    if (rhErr) {
+      return next(rhErr);
+    }
+    if (histories !== null) {
+      async.forEach(histories, function(history, callback) {
+        history.findLatest( function(err, documentreference) {
+          models.push(documentreference);
+          callback();
+        });
+      }, function(err) {
+          console.log(models);
+          res.send(eco.render(template, models));
+      });
+    } else {
+      console.log('no documentreference found');
+      res.send(500);
     }
   });
 };
