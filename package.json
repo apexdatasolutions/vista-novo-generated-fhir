@@ -13,6 +13,8 @@
     "underscore": "1.5.1",
     "swig": "1.1.0",
     "restler": "2.0.1",
-    "async": "0.2.9"
+    "async": "0.2.9",
+    "mocha": "1.15.1",
+    "pow-mongoose-fixtures": "0.3.0"
   }
 }
