@@ -9,10 +9,17 @@ var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helpe
 
 exports.load = function(req, res, id, vid, next) {
   if (req.resourceHistory) {
-    req.resourceHistory.findLatest(function(err, profile) {
-      req.profile = profile;
-      next(profile);
-    });
+    if(vid !== null){
+      req.resourceHistory.getVersion(vid, function(err, profile) {
+        req.profile = profile;
+        next(profile);
+      });
+    } else {
+      req.resourceHistory.findLatest(function(err, profile) {
+        req.profile = profile;
+        next(profile);
+      });
+    }
   } else {
     ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
       if (rhErr) {
@@ -87,22 +94,42 @@ exports.destroy = function(req, res) {
 };
 
 exports.list = function(req, res) {
-  var models = [];
-  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
 
-  ResourceHistory.find({resourceType:"Profile"}, function (rhErr, histories) {
+  var content = {
+    title: "Search results for resource type Profile",
+    id: "http://localhost:3000/profile",
+    totalResults: 0,
+    link: {
+      href: "http://localhost:3000/profile",
+      rel: "self"
+    },
+    updated: new Date(Date.now()),
+    entry: []
+  };
+
+  ResourceHistory.find({resourceType:"Patient"}, function (rhErr, histories) {
     if (rhErr) {
       return next(rhErr);
     }
     if (histories !== null) {
       async.forEach(histories, function(history, callback) {
         history.findLatest( function(err, profile) {
-          models.push(profile);
+          var entrywrapper = {
+            title: "Patient " + history.latestVersionId() + " Version " + history.versionCount(),
+            id: "http://localhost:3000/profile/@" + history.latestVersionId(),
+            link: {
+              href: "http://localhost:3000/profile/@" + history.latestVersionId() + "/history/@" + history.versionCount(),
+              rel: "self"
+            },
+            updated: history.lastUpdatedAt(),
+            published: new Date(Date.now()),
+            content: profile
+          };
+          content.entry.push(entrywrapper);
           callback();
         });
       }, function(err) {
-          console.log(models);
-          res.send(eco.render(template, models));
+          res.send(JSON.stringify(content));
       });
     } else {
       console.log('no profile found');

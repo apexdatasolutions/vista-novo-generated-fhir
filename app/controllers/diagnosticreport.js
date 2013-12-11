@@ -9,10 +9,17 @@ var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helpe
 
 exports.load = function(req, res, id, vid, next) {
   if (req.resourceHistory) {
-    req.resourceHistory.findLatest(function(err, diagnosticreport) {
-      req.diagnosticreport = diagnosticreport;
-      next(diagnosticreport);
-    });
+    if(vid !== null){
+      req.resourceHistory.getVersion(vid, function(err, diagnosticreport) {
+        req.diagnosticreport = diagnosticreport;
+        next(diagnosticreport);
+      });
+    } else {
+      req.resourceHistory.findLatest(function(err, diagnosticreport) {
+        req.diagnosticreport = diagnosticreport;
+        next(diagnosticreport);
+      });
+    }
   } else {
     ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
       if (rhErr) {
@@ -87,22 +94,42 @@ exports.destroy = function(req, res) {
 };
 
 exports.list = function(req, res) {
-  var models = [];
-  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
 
-  ResourceHistory.find({resourceType:"DiagnosticReport"}, function (rhErr, histories) {
+  var content = {
+    title: "Search results for resource type DiagnosticReport",
+    id: "http://localhost:3000/diagnosticreport",
+    totalResults: 0,
+    link: {
+      href: "http://localhost:3000/diagnosticreport",
+      rel: "self"
+    },
+    updated: new Date(Date.now()),
+    entry: []
+  };
+
+  ResourceHistory.find({resourceType:"Patient"}, function (rhErr, histories) {
     if (rhErr) {
       return next(rhErr);
     }
     if (histories !== null) {
       async.forEach(histories, function(history, callback) {
         history.findLatest( function(err, diagnosticreport) {
-          models.push(diagnosticreport);
+          var entrywrapper = {
+            title: "Patient " + history.latestVersionId() + " Version " + history.versionCount(),
+            id: "http://localhost:3000/diagnosticreport/@" + history.latestVersionId(),
+            link: {
+              href: "http://localhost:3000/diagnosticreport/@" + history.latestVersionId() + "/history/@" + history.versionCount(),
+              rel: "self"
+            },
+            updated: history.lastUpdatedAt(),
+            published: new Date(Date.now()),
+            content: diagnosticreport
+          };
+          content.entry.push(entrywrapper);
           callback();
         });
       }, function(err) {
-          console.log(models);
-          res.send(eco.render(template, models));
+          res.send(JSON.stringify(content));
       });
     } else {
       console.log('no diagnosticreport found');

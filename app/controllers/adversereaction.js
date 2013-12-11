@@ -9,10 +9,17 @@ var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helpe
 
 exports.load = function(req, res, id, vid, next) {
   if (req.resourceHistory) {
-    req.resourceHistory.findLatest(function(err, adversereaction) {
-      req.adversereaction = adversereaction;
-      next(adversereaction);
-    });
+    if(vid !== null){
+      req.resourceHistory.getVersion(vid, function(err, adversereaction) {
+        req.adversereaction = adversereaction;
+        next(adversereaction);
+      });
+    } else {
+      req.resourceHistory.findLatest(function(err, adversereaction) {
+        req.adversereaction = adversereaction;
+        next(adversereaction);
+      });
+    }
   } else {
     ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
       if (rhErr) {
@@ -87,22 +94,42 @@ exports.destroy = function(req, res) {
 };
 
 exports.list = function(req, res) {
-  var models = [];
-  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
 
-  ResourceHistory.find({resourceType:"AdverseReaction"}, function (rhErr, histories) {
+  var content = {
+    title: "Search results for resource type AdverseReaction",
+    id: "http://localhost:3000/adversereaction",
+    totalResults: 0,
+    link: {
+      href: "http://localhost:3000/adversereaction",
+      rel: "self"
+    },
+    updated: new Date(Date.now()),
+    entry: []
+  };
+
+  ResourceHistory.find({resourceType:"Patient"}, function (rhErr, histories) {
     if (rhErr) {
       return next(rhErr);
     }
     if (histories !== null) {
       async.forEach(histories, function(history, callback) {
         history.findLatest( function(err, adversereaction) {
-          models.push(adversereaction);
+          var entrywrapper = {
+            title: "Patient " + history.latestVersionId() + " Version " + history.versionCount(),
+            id: "http://localhost:3000/adversereaction/@" + history.latestVersionId(),
+            link: {
+              href: "http://localhost:3000/adversereaction/@" + history.latestVersionId() + "/history/@" + history.versionCount(),
+              rel: "self"
+            },
+            updated: history.lastUpdatedAt(),
+            published: new Date(Date.now()),
+            content: adversereaction
+          };
+          content.entry.push(entrywrapper);
           callback();
         });
       }, function(err) {
-          console.log(models);
-          res.send(eco.render(template, models));
+          res.send(JSON.stringify(content));
       });
     } else {
       console.log('no adversereaction found');

@@ -9,10 +9,17 @@ var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helpe
 
 exports.load = function(req, res, id, vid, next) {
   if (req.resourceHistory) {
-    req.resourceHistory.findLatest(function(err, media) {
-      req.media = media;
-      next(media);
-    });
+    if(vid !== null){
+      req.resourceHistory.getVersion(vid, function(err, media) {
+        req.media = media;
+        next(media);
+      });
+    } else {
+      req.resourceHistory.findLatest(function(err, media) {
+        req.media = media;
+        next(media);
+      });
+    }
   } else {
     ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
       if (rhErr) {
@@ -87,22 +94,42 @@ exports.destroy = function(req, res) {
 };
 
 exports.list = function(req, res) {
-  var models = [];
-  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
 
-  ResourceHistory.find({resourceType:"Media"}, function (rhErr, histories) {
+  var content = {
+    title: "Search results for resource type Media",
+    id: "http://localhost:3000/media",
+    totalResults: 0,
+    link: {
+      href: "http://localhost:3000/media",
+      rel: "self"
+    },
+    updated: new Date(Date.now()),
+    entry: []
+  };
+
+  ResourceHistory.find({resourceType:"Patient"}, function (rhErr, histories) {
     if (rhErr) {
       return next(rhErr);
     }
     if (histories !== null) {
       async.forEach(histories, function(history, callback) {
         history.findLatest( function(err, media) {
-          models.push(media);
+          var entrywrapper = {
+            title: "Patient " + history.latestVersionId() + " Version " + history.versionCount(),
+            id: "http://localhost:3000/media/@" + history.latestVersionId(),
+            link: {
+              href: "http://localhost:3000/media/@" + history.latestVersionId() + "/history/@" + history.versionCount(),
+              rel: "self"
+            },
+            updated: history.lastUpdatedAt(),
+            published: new Date(Date.now()),
+            content: media
+          };
+          content.entry.push(entrywrapper);
           callback();
         });
       }, function(err) {
-          console.log(models);
-          res.send(eco.render(template, models));
+          res.send(JSON.stringify(content));
       });
     } else {
       console.log('no media found');

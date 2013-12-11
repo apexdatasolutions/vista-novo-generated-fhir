@@ -9,10 +9,17 @@ var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helpe
 
 exports.load = function(req, res, id, vid, next) {
   if (req.resourceHistory) {
-    req.resourceHistory.findLatest(function(err, supply) {
-      req.supply = supply;
-      next(supply);
-    });
+    if(vid !== null){
+      req.resourceHistory.getVersion(vid, function(err, supply) {
+        req.supply = supply;
+        next(supply);
+      });
+    } else {
+      req.resourceHistory.findLatest(function(err, supply) {
+        req.supply = supply;
+        next(supply);
+      });
+    }
   } else {
     ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
       if (rhErr) {
@@ -87,22 +94,42 @@ exports.destroy = function(req, res) {
 };
 
 exports.list = function(req, res) {
-  var models = [];
-  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
 
-  ResourceHistory.find({resourceType:"Supply"}, function (rhErr, histories) {
+  var content = {
+    title: "Search results for resource type Supply",
+    id: "http://localhost:3000/supply",
+    totalResults: 0,
+    link: {
+      href: "http://localhost:3000/supply",
+      rel: "self"
+    },
+    updated: new Date(Date.now()),
+    entry: []
+  };
+
+  ResourceHistory.find({resourceType:"Patient"}, function (rhErr, histories) {
     if (rhErr) {
       return next(rhErr);
     }
     if (histories !== null) {
       async.forEach(histories, function(history, callback) {
         history.findLatest( function(err, supply) {
-          models.push(supply);
+          var entrywrapper = {
+            title: "Patient " + history.latestVersionId() + " Version " + history.versionCount(),
+            id: "http://localhost:3000/supply/@" + history.latestVersionId(),
+            link: {
+              href: "http://localhost:3000/supply/@" + history.latestVersionId() + "/history/@" + history.versionCount(),
+              rel: "self"
+            },
+            updated: history.lastUpdatedAt(),
+            published: new Date(Date.now()),
+            content: supply
+          };
+          content.entry.push(entrywrapper);
           callback();
         });
       }, function(err) {
-          console.log(models);
-          res.send(eco.render(template, models));
+          res.send(JSON.stringify(content));
       });
     } else {
       console.log('no supply found');
