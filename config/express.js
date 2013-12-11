@@ -14,9 +14,20 @@ app.engine('eco', cons.eco);
 app.set('view engine', 'eco');
 app.set('views', __dirname + '/../app/views');
 
+var serviceConfig = require('./external_services')
+
+app.use(function(req, res, next) {
+  req.serviceConfig = serviceConfig;
+  next();
+});
+
 var patientServiceInvoker = require(__dirname + '/../lib/patient_service_invoker');
 var observationServiceInvoker = require(__dirname + '/../lib/observation_service_invoker');
 // setup routes
+
+app.get('/favicon.ico', function(req, res) {
+  res.send(404)
+});
 
 // root url(not necessary)
 app.get('/', function(req, res){
