@@ -9,10 +9,17 @@ var ResponseFormatHelper = require(__dirname + '/../../lib/response_format_helpe
 
 exports.load = function(req, res, id, vid, next) {
   if (req.resourceHistory) {
-    req.resourceHistory.findLatest(function(err, patient) {
-      req.patient = patient;
-      next(patient);
-    });
+    if(vid !== null){
+      req.resourceHistory.getVersion(vid, function(err, patient) {
+        req.patient = patient;
+        next(patient);
+      });
+    } else {
+      req.resourceHistory.findLatest(function(err, patient) {
+        req.patient = patient;
+        next(patient);
+      });
+    }
   } else {
     ResourceHistory.findOne(id, function(rhErr, resourceHistory) {
       if (rhErr) {
@@ -87,8 +94,18 @@ exports.destroy = function(req, res) {
 };
 
 exports.list = function(req, res) {
-  var models = [];
-  var template = fs.readFileSync(__dirname + "/../views/atom.xml.eco", "utf-8");
+
+  var content = {
+    title: "Search results for resource type Patient",
+    id: "http://localhost:3000/patient",
+    totalResults: 0,
+    link: {
+      href: "http://localhost:3000/patient",
+      rel: "self"
+    },
+    updated: new Date(Date.now()),
+    entry: []
+  };
 
   ResourceHistory.find({resourceType:"Patient"}, function (rhErr, histories) {
     if (rhErr) {
@@ -97,12 +114,22 @@ exports.list = function(req, res) {
     if (histories !== null) {
       async.forEach(histories, function(history, callback) {
         history.findLatest( function(err, patient) {
-          models.push(patient);
+          var entrywrapper = {
+            title: "Patient " + history.latestVersionId() + " Version " + history.versionCount(),
+            id: "http://localhost:3000/patient/@" + history.latestVersionId(),
+            link: {
+              href: "http://localhost:3000/patient/@" + history.latestVersionId() + "/history/@" + history.versionCount(),
+              rel: "self"
+            },
+            updated: history.lastUpdatedAt(),
+            published: new Date(Date.now()),
+            content: patient
+          };
+          content.entry.push(entrywrapper);
           callback();
         });
       }, function(err) {
-          console.log(models);
-          res.send(eco.render(template, models));
+          res.send(JSON.stringify(content));
       });
     } else {
       console.log('no patient found');
