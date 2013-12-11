@@ -13,6 +13,25 @@ ResourceHistorySchema.methods = {
     this.history.push({resourceId: resourceId, createdAt: Date.now()});
   },
 
+  getVersion: function (version, callback) {
+    var resourceModel = mongoose.model(this.resourceType);
+    resourceModel.findOne(this.getVersionId(version), function(err, instance){
+      callback(err, instance);
+    });
+  },
+
+  getVersionId: function (version) {
+    return this.history[version-1].resourceId.toHexString();
+  },
+
+  versionCount: function () {
+    return this.history.length;
+  },
+
+  lastUpdatedAt: function () {
+    return _.last(this.history).createdAt;
+  },
+
   latestVersionId: function () {
     return _.last(this.history).resourceId.toHexString();
   },
