@@ -23,6 +23,10 @@ app.use(function(req, res, next) {
 
 var patientServiceInvoker = require(__dirname + '/../lib/patient_service_invoker');
 var observationServiceInvoker = require(__dirname + '/../lib/observation_service_invoker');
+
+
+app.use(express.bodyParser());
+
 // setup routes
 
 app.get('/favicon.ico', function(req, res) {
@@ -76,7 +80,7 @@ app.get('/:model/@:id/history/@:vid', function(req,res){
 });
 
 //create for model
-app.get('/:model/create', function(req,res){
+app.post('/:model/create', function(req,res){
   var controller = require('../app/controllers/' + req.params.model);
   controller.create(req,res);
 });
