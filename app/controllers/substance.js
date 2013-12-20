@@ -107,18 +107,20 @@ exports.list = function(req, res) {
     entry: []
   };
 
-  ResourceHistory.find({resourceType:"Patient"}, function (rhErr, histories) {
+  ResourceHistory.find({resourceType:"Substance"}, function (rhErr, histories) {
     if (rhErr) {
       return next(rhErr);
     }
-    if (histories !== null) {
+      var counter = 0;
       async.forEach(histories, function(history, callback) {
+        counter++;
+        content.totalResults = counter;
         history.findLatest( function(err, substance) {
           var entrywrapper = {
-            title: "Patient " + history.latestVersionId() + " Version " + history.versionCount(),
-            id: "http://localhost:3000/substance/@" + history.latestVersionId(),
+            title: "Substance " + history.vistaId + " Version " + history.versionCount(),
+            id: "http://localhost:3000/substance/@" + history.vistaId,
             link: {
-              href: "http://localhost:3000/substance/@" + history.latestVersionId() + "/history/@" + history.versionCount(),
+              href: "http://localhost:3000/substance/@" + history.vistaId + "/history/@" + history.versionCount(),
               rel: "self"
             },
             updated: history.lastUpdatedAt(),

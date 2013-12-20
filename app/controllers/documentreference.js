@@ -107,18 +107,20 @@ exports.list = function(req, res) {
     entry: []
   };
 
-  ResourceHistory.find({resourceType:"Patient"}, function (rhErr, histories) {
+  ResourceHistory.find({resourceType:"DocumentReference"}, function (rhErr, histories) {
     if (rhErr) {
       return next(rhErr);
     }
-    if (histories !== null) {
+      var counter = 0;
       async.forEach(histories, function(history, callback) {
+        counter++;
+        content.totalResults = counter;
         history.findLatest( function(err, documentreference) {
           var entrywrapper = {
-            title: "Patient " + history.latestVersionId() + " Version " + history.versionCount(),
-            id: "http://localhost:3000/documentreference/@" + history.latestVersionId(),
+            title: "DocumentReference " + history.vistaId + " Version " + history.versionCount(),
+            id: "http://localhost:3000/documentreference/@" + history.vistaId,
             link: {
-              href: "http://localhost:3000/documentreference/@" + history.latestVersionId() + "/history/@" + history.versionCount(),
+              href: "http://localhost:3000/documentreference/@" + history.vistaId + "/history/@" + history.versionCount(),
               rel: "self"
             },
             updated: history.lastUpdatedAt(),
