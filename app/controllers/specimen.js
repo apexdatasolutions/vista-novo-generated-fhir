@@ -111,31 +111,27 @@ exports.list = function(req, res) {
     if (rhErr) {
       return next(rhErr);
     }
-      var counter = 0;
-      async.forEach(histories, function(history, callback) {
-        counter++;
-        content.totalResults = counter;
-        history.findLatest( function(err, specimen) {
-          var entrywrapper = {
-            title: "Specimen " + history.vistaId + " Version " + history.versionCount(),
-            id: "http://localhost:3000/specimen/@" + history.vistaId,
-            link: {
-              href: "http://localhost:3000/specimen/@" + history.vistaId + "/history/@" + history.versionCount(),
-              rel: "self"
-            },
-            updated: history.lastUpdatedAt(),
-            published: new Date(Date.now()),
-            content: specimen
-          };
-          content.entry.push(entrywrapper);
-          callback();
-        });
-      }, function(err) {
-          res.send(JSON.stringify(content));
+    var counter = 0;
+    async.forEach(histories, function(history, callback) {
+      counter++;
+      content.totalResults = counter;
+      history.findLatest( function(err, specimen) {
+        var entrywrapper = {
+          title: "Specimen " + history.vistaId + " Version " + history.versionCount(),
+          id: "http://localhost:3000/specimen/@" + history.vistaId,
+          link: {
+            href: "http://localhost:3000/specimen/@" + history.vistaId + "/history/@" + history.versionCount(),
+            rel: "self"
+          },
+          updated: history.lastUpdatedAt(),
+          published: new Date(Date.now()),
+          content: specimen
+        };
+        content.entry.push(entrywrapper);
+        callback();
       });
-    } else {
-      console.log('no specimen found');
-      res.send(500);
-    }
+    }, function(err) {
+        res.send(JSON.stringify(content));
+    });
   });
 };

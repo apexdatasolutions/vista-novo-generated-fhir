@@ -111,31 +111,27 @@ exports.list = function(req, res) {
     if (rhErr) {
       return next(rhErr);
     }
-      var counter = 0;
-      async.forEach(histories, function(history, callback) {
-        counter++;
-        content.totalResults = counter;
-        history.findLatest( function(err, careplan) {
-          var entrywrapper = {
-            title: "CarePlan " + history.vistaId + " Version " + history.versionCount(),
-            id: "http://localhost:3000/careplan/@" + history.vistaId,
-            link: {
-              href: "http://localhost:3000/careplan/@" + history.vistaId + "/history/@" + history.versionCount(),
-              rel: "self"
-            },
-            updated: history.lastUpdatedAt(),
-            published: new Date(Date.now()),
-            content: careplan
-          };
-          content.entry.push(entrywrapper);
-          callback();
-        });
-      }, function(err) {
-          res.send(JSON.stringify(content));
+    var counter = 0;
+    async.forEach(histories, function(history, callback) {
+      counter++;
+      content.totalResults = counter;
+      history.findLatest( function(err, careplan) {
+        var entrywrapper = {
+          title: "CarePlan " + history.vistaId + " Version " + history.versionCount(),
+          id: "http://localhost:3000/careplan/@" + history.vistaId,
+          link: {
+            href: "http://localhost:3000/careplan/@" + history.vistaId + "/history/@" + history.versionCount(),
+            rel: "self"
+          },
+          updated: history.lastUpdatedAt(),
+          published: new Date(Date.now()),
+          content: careplan
+        };
+        content.entry.push(entrywrapper);
+        callback();
       });
-    } else {
-      console.log('no careplan found');
-      res.send(500);
-    }
+    }, function(err) {
+        res.send(JSON.stringify(content));
+    });
   });
 };
