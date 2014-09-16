@@ -23,6 +23,8 @@ app.use(function(req, res, next) {
 
 var patientServiceInvoker = require(__dirname + '/../lib/patient_service_invoker');
 var observationServiceInvoker = require(__dirname + '/../lib/observation_service_invoker');
+var medicationServiceInvoker = require(__dirname + '/../lib/medication_service_invoker');
+var conditionServiceInvoker = require(__dirname + '/../lib/condition_service_invoker');
 
 
 app.use(express.bodyParser());
@@ -116,5 +118,7 @@ app.delete('/:model/destroy/:id/:vid', function(req,res){
 
 app.param('model', patientServiceInvoker.checkPatientCache);
 app.param('model', observationServiceInvoker.checkObservationCache);
+app.param('model', medicationServiceInvoker.checkMedicationCache);
+app.param('model', conditionServiceInvoker.checkConditionCache);
 
 exports.app = app;

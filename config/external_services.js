@@ -12,3 +12,15 @@ exports.patients = {
   username: 'andy@mitre.org',
   password: 'splatter'
 };
+
+exports.medications = {
+  url: "http://localhost:3001/admin/medication/",
+  username: 'andy@mitre.org',
+  password: 'splatter'
+};
+
+exports.conditions = {
+  url: "http://localhost:3001/admin/condition/",
+  username: 'andy@mitre.org',
+  password: 'splatter'
+};
